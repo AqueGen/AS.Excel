@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using AS.EX.Data.ExcelData.Analyzers;
 using AS.EX.Data.ExcelData.Types;
 
 namespace AS.EX.Data.ExcelData
@@ -76,7 +77,7 @@ namespace AS.EX.Data.ExcelData
 
                 if (cell.IsCellHasReferenceToItself())
                 {
-                    cell.SetCellErrorState(ErrorMessage.ReferenceToSelfCell);
+                    cell.SetCellErrorState("ReferenceToSelfCell");
                 }
 
                 if (!isChangedCellValue)
@@ -97,7 +98,7 @@ namespace AS.EX.Data.ExcelData
 
         private static void CalculateIfCellReferenceAbsent(Cell cell)
         {
-            if (!CellAnalyze.IsCellReferencePresent(cell.Value))
+            if (!ExcelCellAnalyzer.IsCellReferencePresent(cell.Value))
             {
                 cell.Type = CellType.Number;
                 cell.Value = Expression.CalculateExpression(cell);
