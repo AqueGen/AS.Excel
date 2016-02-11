@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using AS.EX.Converters.Converters;
+using AS.EX.Data.ExcelData.Analyzers;
 using AS.EX.Data.ExcelData.Types;
 
 namespace AS.EX.Data.ExcelData
@@ -96,7 +97,7 @@ namespace AS.EX.Data.ExcelData
         {
             Value = value;
             Type = type;
-            IsCalculated = !CellAnalyze.IsCellReferencePresent(Value) && !CellAnalyze.IsArithmeticOperationPresent(value);
+            IsCalculated = !ExcelCellAnalyzer.IsCellReferencePresent(Value) && !ExcelCellAnalyzer.IsArithmeticOperationPresent(value);
         }
 
         /// <summary>
@@ -109,7 +110,7 @@ namespace AS.EX.Data.ExcelData
 
             if (Value != null)
             {
-                var values = Value.Split(EnumHelper.ArithmeticTypeEnumHelper.GetOperationSymbols());
+                var values = Value.Split(OperationAnalyzer.GetOperationSymbols());
 
                 if (values.Contains(CellCoordinate))
                 {
@@ -133,6 +134,28 @@ namespace AS.EX.Data.ExcelData
             Type = CellType.Error;
             Value = errorFirstSymbol + errorMessage;
         }
+
+        #region Overload binnary operations
+        public static Cell operator +(Cell obj1, Cell obj2)
+        {
+            return new Cell(1, 1);
+        }
+
+        public static Cell operator -(Cell obj1, Cell obj2)
+        {
+            return new Cell(1, 1);
+        }
+
+        public static Cell operator /(Cell obj1, Cell obj2)
+        {
+            return new Cell(1, 1);
+        }
+
+        public static Cell operator *(Cell obj1, Cell obj2)
+        {
+            return new Cell(1, 1);
+        }
+        #endregion Overload binnary operations
 
 
         /// <summary>

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DE82AD0E-A65A-4727-8BE9-9FB16A2DE09E}</ProjectGuid>
+    <ProjectGuid>{9A65FDB2-0EB1-4195-8CA7-2D0540CC5987}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AS.EX.Data</RootNamespace>
-    <AssemblyName>AS.EX.Data</AssemblyName>
+    <RootNamespace>AS.EX.Core</RootNamespace>
+    <AssemblyName>AS.EX.Core</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,20 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExcelData\Analyzers\ExcelCellAnalyzer.cs" />
-    <Compile Include="ExcelData\Analyzers\OperationAnalyzer.cs" />
-    <Compile Include="ExcelData\Cell.cs" />
-    <Compile Include="ExcelData\CellTable.cs" />
-    <Compile Include="ExcelData\Types\ArithmeticType.cs" />
-    <Compile Include="ExcelData\Types\CellType.cs" />
-    <Compile Include="ExcelData\Types\OperationType.cs" />
-    <Compile Include="Extensions\AsExConvert.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AS.EX.Converters\AS.EX.Converters.csproj">
-      <Project>{51e6aa34-9e0c-43cd-a907-26ec20738b29}</Project>
-      <Name>AS.EX.Converters</Name>
+    <ProjectReference Include="..\AS.EX.Data\AS.EX.Data.csproj">
+      <Project>{DE82AD0E-A65A-4727-8BE9-9FB16A2DE09E}</Project>
+      <Name>AS.EX.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

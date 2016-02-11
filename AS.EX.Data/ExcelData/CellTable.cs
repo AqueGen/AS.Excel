@@ -119,7 +119,7 @@ namespace AS.EX.Data.ExcelData
                     return cell;
                 }
             }
-            throw new ArgumentException(ExceptionConstructor.MessageGenerator(ErrorMessage.CellNotFound, cellReference));
+            throw new ArgumentException("Cell not found");
         }
 
         /// <summary>

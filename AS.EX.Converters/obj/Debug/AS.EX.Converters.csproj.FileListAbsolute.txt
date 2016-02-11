@@ -1,0 +1,5 @@
+E:\AS.EX\AS.EX.Converters\bin\Debug\AS.EX.Converters.dll
+E:\AS.EX\AS.EX.Converters\bin\Debug\AS.EX.Converters.pdb
+E:\AS.EX\AS.EX.Converters\obj\Debug\AS.EX.Converters.csprojResolveAssemblyReference.cache
+E:\AS.EX\AS.EX.Converters\obj\Debug\AS.EX.Converters.dll
+E:\AS.EX\AS.EX.Converters\obj\Debug\AS.EX.Converters.pdb
