@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace AS.EX.Converters.Converters
+namespace AS.EX.Data.ExcelData.Converters
 {
-    internal static class Number2ColumnNameConverter
+    internal static class CellColumnNameConverter
     {
         private const char FirstExcelLetter = 'A';
         private const char LastExcelLetter = 'Z';

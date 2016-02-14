@@ -1,0 +1,7 @@
+E:\AS.EX\AS.EX.Core\bin\Debug\AS.EX.Core.dll
+E:\AS.EX\AS.EX.Core\bin\Debug\AS.EX.Core.pdb
+E:\AS.EX\AS.EX.Core\bin\Debug\AS.EX.Data.dll
+E:\AS.EX\AS.EX.Core\bin\Debug\AS.EX.Data.pdb
+E:\AS.EX\AS.EX.Core\obj\Debug\AS.EX.Core.csprojResolveAssemblyReference.cache
+E:\AS.EX\AS.EX.Core\obj\Debug\AS.EX.Core.dll
+E:\AS.EX\AS.EX.Core\obj\Debug\AS.EX.Core.pdb

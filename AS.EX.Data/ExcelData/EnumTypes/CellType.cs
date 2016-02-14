@@ -1,4 +1,4 @@
-﻿namespace AS.EX.Data.ExcelData.Types
+﻿namespace AS.EX.Data.ExcelData.EnumTypes
 {
     /// <summary>
     ///     Cell type enum.

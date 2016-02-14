@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using AS.EX.Data.ExcelData.Analyzers;
-using AS.EX.Data.ExcelData.Types;
+using AS.EX.Data.ExcelData.Calculates;
+using AS.EX.Data.ExcelData.Converters;
+using AS.EX.Data.ExcelData.EnumTypes;
 
 namespace AS.EX.Data.ExcelData
 {
@@ -70,7 +72,7 @@ namespace AS.EX.Data.ExcelData
         {
             try
             {
-                var oldCellValue = cell.Value;
+                string oldCellValue = cell.Value;
                 ConvertReferenceToReferenceValue(cell);
 
                 CalculateIfCellReferenceAbsent(cell);
@@ -93,7 +95,7 @@ namespace AS.EX.Data.ExcelData
 
         private void ConvertReferenceToReferenceValue(Cell cell)
         {
-            cell.Value = Expression.CastReferenceToValue(this, cell);
+            cell.Value = Converter.CastReferenceToValue(this, cell);
         }
 
         private static void CalculateIfCellReferenceAbsent(Cell cell)
@@ -101,7 +103,7 @@ namespace AS.EX.Data.ExcelData
             if (!ExcelCellAnalyzer.IsCellReferencePresent(cell.Value))
             {
                 cell.Type = CellType.Number;
-                cell.Value = Expression.CalculateExpression(cell);
+                cell.Value = CellExpression.Calculate(cell);
                 cell.IsCalculated = true;
             }
         }
@@ -115,7 +117,7 @@ namespace AS.EX.Data.ExcelData
         {
             foreach (var cell in Cells)
             {
-                if (cell.CellCoordinate == cellReference)
+                if (cell.GetCellCoordinate().Equals(cellReference))
                 {
                     return cell;
                 }
@@ -137,7 +139,7 @@ namespace AS.EX.Data.ExcelData
 
         private static bool IsChangedValue(string currentValue, string previousValue)
         {
-            return currentValue != previousValue;
+            return !currentValue.Equals(previousValue);
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Linq;
-using AS.EX.Converters.Converters;
 using AS.EX.Data.ExcelData.Analyzers;
-using AS.EX.Data.ExcelData.Types;
+using AS.EX.Data.ExcelData.Converters;
+using AS.EX.Data.ExcelData.EnumTypes;
 
 namespace AS.EX.Data.ExcelData
 {
@@ -26,13 +26,10 @@ namespace AS.EX.Data.ExcelData
         /// <value>
         ///     The cell coordinate.
         /// </value>
-        public string CellCoordinate
+        public string GetCellCoordinate()
         {
-            get
-            {
-                var rowNumber = RowIndex + FirstRowInExcel;
-                return ColumnName + rowNumber;
-            }
+            var rowNumber = RowIndex + FirstRowInExcel;
+            return ColumnName + rowNumber;
         }
 
         /// <summary>
@@ -51,7 +48,7 @@ namespace AS.EX.Data.ExcelData
         /// </value>
         public string ColumnName
         {
-            get { return Converter.Number2ColumnName(ColumnIndex); }
+            get { return Converter.CellNumberToColumnName(ColumnIndex); }
         }
 
         /// <summary>
@@ -112,7 +109,7 @@ namespace AS.EX.Data.ExcelData
             {
                 var values = Value.Split(OperationAnalyzer.GetOperationSymbols());
 
-                if (values.Contains(CellCoordinate))
+                if (values.Contains(GetCellCoordinate()))
                 {
                     isReferenceToItSelfPresent = true;
                     Type = CellType.Error;
@@ -167,7 +164,7 @@ namespace AS.EX.Data.ExcelData
         public override string ToString()
         {
             return
-                $"CellReference: {CellCoordinate}, ColumnIndex: {ColumnIndex}, ColumnName: {ColumnName}, IsCalculated: {IsCalculated}, RowIndex: {RowIndex}, Type: {Type}, Value: {Value}.";
+                $"CellReference: {GetCellCoordinate()}, ColumnIndex: {ColumnIndex}, ColumnName: {ColumnName}, IsCalculated: {IsCalculated}, RowIndex: {RowIndex}, Type: {Type}, Value: {Value}.";
         }
     }
 }

@@ -1,1 +1,5 @@
 E:\AS.EX\AS.EX.Data\obj\Debug\AS.EX.Data.csprojResolveAssemblyReference.cache
+E:\AS.EX\AS.EX.Data\bin\Debug\AS.EX.Data.dll
+E:\AS.EX\AS.EX.Data\bin\Debug\AS.EX.Data.pdb
+E:\AS.EX\AS.EX.Data\obj\Debug\AS.EX.Data.dll
+E:\AS.EX\AS.EX.Data\obj\Debug\AS.EX.Data.pdb

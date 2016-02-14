@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Diagnostics.Contracts;
 using System.Text.RegularExpressions;
-using AS.EX.Data.ExcelData.Types;
+using AS.EX.Data.ExcelData.EnumTypes;
 
 namespace AS.EX.Data.ExcelData.Analyzers
 {
     public class ExcelCellAnalyzer
     {
-        private const string StartExpression = "=";
-        private const string StartText = "'";
+        private const string ExpressionSymbol = "=";
+        private const string TextSumbol = "'";
 
 
         /// <summary>
@@ -41,10 +40,8 @@ namespace AS.EX.Data.ExcelData.Analyzers
         ///     Setups the cell parameters.
         /// </summary>
         /// <param name="cell">The cell.</param>
-        public static void SetCellParameters(Cell cell)
+        public static void SetParametersForCell(Cell cell)
         {
-            Contract.Requires<ArgumentNullException>(cell != null);
-
             const int startIndex = 0;
             const int firstSymbolIndex = 1;
 
@@ -60,22 +57,20 @@ namespace AS.EX.Data.ExcelData.Analyzers
 
         private static void SetEmptyValue(Cell cell)
         {
-            Contract.Requires<ArgumentNullException>(cell != null);
             cell.SetVariables(string.Empty, CellType.Empty, true);
         }
 
         private static void SetNotEmptyValue(Cell cell, int startIndex, int firstSymbolIndex)
         {
-            Contract.Requires<ArgumentNullException>(cell != null);
             var firstSymbol = cell.Value.Substring(startIndex, firstSymbolIndex);
 
-            if (firstSymbol == StartExpression)
+            if (firstSymbol.Equals(ExpressionSymbol))
             {
-                cell.SetVariables(cell.Value.Remove(0, StartExpression.Length), CellType.Expression, true);
+                cell.SetVariables(cell.Value.Remove(0, ExpressionSymbol.Length), CellType.Expression, true);
             }
-            else if (firstSymbol == StartText)
+            else if (firstSymbol.Equals(TextSumbol))
             {
-                cell.SetVariables(cell.Value.Remove(0, StartText.Length), CellType.Text, true);
+                cell.SetVariables(cell.Value.Remove(0, TextSumbol.Length), CellType.Text, true);
             }
             else
             {
@@ -86,12 +81,10 @@ namespace AS.EX.Data.ExcelData.Analyzers
 
         private static void ErrorCellIfNegativeNumber(Cell cell)
         {
-            Contract.Requires<ArgumentNullException>(cell != null);
-
             var value = Convert.ToInt32(cell.Value);
             if (value < 0)
             {
-                //cell.SetCellErrorState(ExceptionConstructor.MessageGenerator(ErrorMessage.NegativeNumber, cell));
+                cell.SetCellErrorState("Negative number");
             }
         }
     }

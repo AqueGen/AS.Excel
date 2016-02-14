@@ -1,11 +1,15 @@
-﻿namespace AS.EX.Data.ExcelData.Types
+﻿namespace AS.EX.Data.ExcelData.EnumTypes
 {
-    public enum OperationType
+    /// <summary>
+    ///     Arithmetic symbol enum.
+    /// </summary>
+    public enum ArithmeticType
     {
+
         /// <summary>
-        ///     Non setup operation.
+        ///     The Default state.
         /// </summary>
-        Default,
+        Default, 
 
         /// <summary>
         ///     The add math operation.

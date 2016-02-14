@@ -1,6 +1,6 @@
 ﻿using System;
-using AS.EX.Data.ExcelData.Types;
-using AS.EX.Data.Extensions;
+using AS.EX.Data.ExcelData.Converters;
+using AS.EX.Data.ExcelData.EnumTypes;
 
 namespace AS.EX.Data.ExcelData.Analyzers
 {
@@ -11,9 +11,9 @@ namespace AS.EX.Data.ExcelData.Analyzers
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns></returns>
-        public static ArithmeticType Value2ArithmeticType(char value)
+        public static ArithmeticType ValueToArithmeticType(char value)
         {
-            return AsExConvert.ToArithmeticType(value);
+            return Converter.ToArithmeticType(value);
         }
 
         /// <summary>

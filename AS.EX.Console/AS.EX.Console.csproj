@@ -52,10 +52,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AS.EX.Core\AS.EX.Core.csproj">
-      <Project>{9a65fdb2-0eb1-4195-8ca7-2d0540cc5987}</Project>
-      <Name>AS.EX.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\AS.EX.Data\AS.EX.Data.csproj">
       <Project>{DE82AD0E-A65A-4727-8BE9-9FB16A2DE09E}</Project>
       <Name>AS.EX.Data</Name>

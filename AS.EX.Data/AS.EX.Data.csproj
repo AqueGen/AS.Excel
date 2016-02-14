@@ -42,19 +42,17 @@
   <ItemGroup>
     <Compile Include="ExcelData\Analyzers\ExcelCellAnalyzer.cs" />
     <Compile Include="ExcelData\Analyzers\OperationAnalyzer.cs" />
+    <Compile Include="ExcelData\Calculates\CellArithmeticCalculation.cs" />
+    <Compile Include="ExcelData\Calculates\CellExpression.cs" />
     <Compile Include="ExcelData\Cell.cs" />
     <Compile Include="ExcelData\CellTable.cs" />
-    <Compile Include="ExcelData\Types\ArithmeticType.cs" />
-    <Compile Include="ExcelData\Types\CellType.cs" />
-    <Compile Include="ExcelData\Types\OperationType.cs" />
-    <Compile Include="Extensions\AsExConvert.cs" />
+    <Compile Include="ExcelData\Converters\CellColumnNameConverter.cs" />
+    <Compile Include="ExcelData\Converters\CellValueConverter.cs" />
+    <Compile Include="ExcelData\Converters\Converter.cs" />
+    <Compile Include="ExcelData\EnumTypes\ArithmeticType.cs" />
+    <Compile Include="ExcelData\EnumTypes\CellType.cs" />
+    <Compile Include="ExcelData\EnumTypes\OperationType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\AS.EX.Converters\AS.EX.Converters.csproj">
-      <Project>{51e6aa34-9e0c-43cd-a907-26ec20738b29}</Project>
-      <Name>AS.EX.Converters</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
