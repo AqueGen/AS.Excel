@@ -1,8 +1,0 @@
-E:\AS.EX\AS.EX.Console\bin\Debug\AS.EX.Console.exe.config
-E:\AS.EX\AS.EX.Console\bin\Debug\AS.EX.Console.exe
-E:\AS.EX\AS.EX.Console\bin\Debug\AS.EX.Console.pdb
-E:\AS.EX\AS.EX.Console\obj\Debug\AS.EX.Console.csprojResolveAssemblyReference.cache
-E:\AS.EX\AS.EX.Console\obj\Debug\AS.EX.Console.exe
-E:\AS.EX\AS.EX.Console\obj\Debug\AS.EX.Console.pdb
-E:\AS.EX\AS.EX.Console\bin\Debug\AS.EX.Data.dll
-E:\AS.EX\AS.EX.Console\bin\Debug\AS.EX.Data.pdb

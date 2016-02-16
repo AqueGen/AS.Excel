@@ -10,9 +10,9 @@ namespace AS.EX.Model.Excel.Converters
         }
 
 
-        public static string ConvertCellReferenceToValue(CellTable table, Cell expressionCell)
+        public static string ConvertCellReferenceToValue(CellTable table, Cell cell)
         {
-            return CellValueConverter.ConvertCellReferenceToValue(table, expressionCell);
+            return CellValueConverter.ConvertCellReferenceToValue(table, cell);
         }
 
         public static ArithmeticTypeEnum ToArithmeticType(char value)

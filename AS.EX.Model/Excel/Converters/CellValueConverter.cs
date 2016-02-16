@@ -5,25 +5,18 @@ namespace AS.EX.Model.Excel.Converters
 {
     public class CellValueConverter
     {
-        public static string ConvertCellReferenceToValue(CellTable table, Cell expressionCell)
+        public static string ConvertCellReferenceToValue(CellTable table, Cell cell)
         {
-            string[] expressionParts = expressionCell.CellValue.Split(OperationAnalyzer.GetOperationSymbols());
+            string value = cell.CellValue;
+            string[] parts = cell.CellValue.Split(OperationAnalyzer.GetOperationSymbols());
 
-            string value = expressionCell.CellValue;
-            foreach (string part in expressionParts)
+            foreach (string part in parts)
             {
-                value = GetReferenceValue(table, expressionCell, value, part);
+                if (ExcelCellAnalyzer.IsCellReferencePresent(part) && cell.CellType != CellTypeEnum.Error)
+                {
+                    value = ReplaceReferenceToValue(table, value, part);
+                }
             }
-            return value;
-        }
-
-        private static string GetReferenceValue(CellTable table, Cell expressionCell, string value, string part)
-        {
-            if (ExcelCellAnalyzer.IsCellReferencePresent(part) && expressionCell.CellType != CellTypeEnum.Error)
-            {
-                value = ReplaceReferenceToValue(table, value, part);
-            }
-
             return value;
         }
 
