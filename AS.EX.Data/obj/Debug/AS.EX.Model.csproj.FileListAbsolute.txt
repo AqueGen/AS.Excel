@@ -1,0 +1,4 @@
+E:\AS.EX\AS.EX.Data\bin\Debug\AS.EX.Model.dll
+E:\AS.EX\AS.EX.Data\bin\Debug\AS.EX.Model.pdb
+E:\AS.EX\AS.EX.Data\obj\Debug\AS.EX.Model.dll
+E:\AS.EX\AS.EX.Data\obj\Debug\AS.EX.Model.pdb

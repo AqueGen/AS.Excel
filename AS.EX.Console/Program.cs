@@ -1,7 +1,6 @@
 ﻿using AS.EX.Console.Inputs;
 using AS.EX.Console.Inputs.Interfaces;
-using AS.EX.Data.ExcelData;
-using AS.EX.Data.ExcelData.Analyzers;
+using AS.EX.Model.Excel;
 
 namespace AS.EX.Console
 {

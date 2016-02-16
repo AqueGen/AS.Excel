@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using AS.EX.Console.Inputs.Interfaces;
-using AS.EX.Data.ExcelData;
+using AS.EX.Model.Excel;
 
 namespace AS.EX.Console.Inputs
 {

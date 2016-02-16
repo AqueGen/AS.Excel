@@ -1,4 +1,4 @@
-﻿namespace AS.EX.Data.Consts
+﻿namespace AS.EX.Model.Consts
 {
     public class CellConst
     {
