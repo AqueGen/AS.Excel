@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AS.EX.Console", "AS.EX.Console\AS.EX.Console.csproj", "{A95E711C-12BF-4AA9-8C0C-BDB8A0411D3D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AS.EX.Model", "AS.EX.Data\AS.EX.Model.csproj", "{DE82AD0E-A65A-4727-8BE9-9FB16A2DE09E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AS.EX.Data", "AS.EX.Data\AS.EX.Data.csproj", "{DE82AD0E-A65A-4727-8BE9-9FB16A2DE09E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

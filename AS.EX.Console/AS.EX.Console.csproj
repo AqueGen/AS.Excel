@@ -52,9 +52,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AS.EX.Data\AS.EX.Model.csproj">
+    <ProjectReference Include="..\AS.EX.Data\AS.EX.Data.csproj">
       <Project>{DE82AD0E-A65A-4727-8BE9-9FB16A2DE09E}</Project>
-      <Name>AS.EX.Model</Name>
+      <Name>AS.EX.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
