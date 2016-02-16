@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DE82AD0E-A65A-4727-8BE9-9FB16A2DE09E}</ProjectGuid>
+    <ProjectGuid>{56F80D29-9B0A-466A-A81C-9B44810A222C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AS.EX.Data</RootNamespace>
-    <AssemblyName>AS.EX.Data</AssemblyName>
+    <RootNamespace>AS.EX.Model</RootNamespace>
+    <AssemblyName>AS.EX.Model</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,24 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Consts\CellConst.cs" />
-    <Compile Include="Consts\TableCellConst.cs" />
-    <Compile Include="ExcelData\Analyzers\CellProperties\CellValueAnalyzer.cs" />
-    <Compile Include="ExcelData\Analyzers\CellProperties\CellIsCalculatedAnalyzer.cs" />
-    <Compile Include="ExcelData\Analyzers\ExcelCellAnalyzer.cs" />
-    <Compile Include="ExcelData\Analyzers\CellProperties\CellTypeAnalyzer.cs" />
-    <Compile Include="ExcelData\Analyzers\OperationAnalyzer.cs" />
-    <Compile Include="ExcelData\Calculates\CellArithmeticCalculation.cs" />
-    <Compile Include="ExcelData\Calculates\CellExpression.cs" />
-    <Compile Include="ExcelData\Cell.cs" />
-    <Compile Include="ExcelData\CellTable.cs" />
-    <Compile Include="ExcelData\CellProperties.cs" />
-    <Compile Include="ExcelData\Converters\CellColumnNameConverter.cs" />
-    <Compile Include="ExcelData\Converters\CellValueConverter.cs" />
-    <Compile Include="ExcelData\Converters\Converter.cs" />
-    <Compile Include="ExcelData\EnumTypes\ArithmeticTypeEnum.cs" />
-    <Compile Include="ExcelData\EnumTypes\CellTypeEnum.cs" />
-    <Compile Include="ExcelData\EnumTypes\OperationTypeEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

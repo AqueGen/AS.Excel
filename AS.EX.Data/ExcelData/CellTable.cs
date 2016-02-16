@@ -10,43 +10,20 @@ namespace AS.EX.Data.ExcelData
 {
     public class CellTable
     {
-        private readonly int _columnLength;
-        private readonly int _rowLength;
 
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="CellTable" /> class.
-        /// </summary>
-        /// <param name="columns">The columns.</param>
-        /// <param name="rows">The rows.</param>
-        public CellTable(int columns, int rows)
+        public CellTable()
         {
             Cells = new List<Cell>();
-            _columnLength = columns;
-            _rowLength = rows;
         }
 
-        /// <summary>
-        ///     Gets or sets the cells.
-        /// </summary>
-        /// <value>
-        ///     The cells.
-        /// </value>
         public List<Cell> Cells { get; set; }
 
-        /// <summary>
-        ///     Adds the cell.
-        /// </summary>
-        /// <param name="cell">The cell.</param>
         public void AddCell(Cell cell)
         {
             Cells.Add(cell);
-            Console.WriteLine($@"Added new Cell: {cell}");
         }
 
 
-        /// <summary>
-        ///     Casts the reference field to value.
-        /// </summary>
         public void CalculateCells()
         {
             bool isChangedCellValue;
@@ -62,7 +39,7 @@ namespace AS.EX.Data.ExcelData
 
         private void CalculateIfNotCalculated(ref bool isChangedCellValue, Cell cell)
         {
-            if (!cell.IsCalculated && cell.Type != CellType.Error)
+            if (!cell.IsCalculated && cell.CellType != CellTypeEnum.Error)
             {
                 CalculateCellValue(ref isChangedCellValue, cell);
             }
@@ -70,49 +47,49 @@ namespace AS.EX.Data.ExcelData
 
         private void CalculateCellValue(ref bool isChangedCellValue, Cell cell)
         {
-            try
+            string oldCellValue = cell.CellValue;
+
+            ConvertCellReferenceToValue(this, cell);
+
+            CalculateIfCellReferenceAbsent(cell);
+
+            ThrowIfCellHasReferenceToItSelf(cell);
+
+            if(!isChangedCellValue)
             {
-                string oldCellValue = cell.Value;
-                ConvertReferenceToReferenceValue(cell);
-
-                CalculateIfCellReferenceAbsent(cell);
-
-                if (cell.IsCellHasReferenceToItself())
-                {
-                    cell.SetCellErrorState("ReferenceToSelfCell");
-                }
-
-                if (!isChangedCellValue)
-                {
-                    isChangedCellValue = IsChangedValue(cell.Value, oldCellValue);
-                }
-            }
-            catch (Exception e)
-            {
-                cell.SetCellErrorState(e.Message);
+                isChangedCellValue = CheckIsChangedCellValue(cell.CellValue, oldCellValue);
             }
         }
 
-        private void ConvertReferenceToReferenceValue(Cell cell)
+        private static bool CheckIsChangedCellValue(string cellValue, string oldCellValue)
         {
-            cell.Value = Converter.CastReferenceToValue(this, cell);
+            bool isChangedCellValue = IsChangedValue(cellValue, oldCellValue);
+            return isChangedCellValue;
+        }
+
+        private static void ThrowIfCellHasReferenceToItSelf(Cell cell)
+        {
+            if (cell.ErrorCellIfCellHasReferenceToItself())
+            {
+                cell.SetCellErrorState("ReferenceToSelfCell");
+            }
+        }
+
+        private void ConvertCellReferenceToValue(CellTable table, Cell cell)
+        {
+            cell.CellValue = Converter.ConvertCellReferenceToValue(table, cell);
         }
 
         private static void CalculateIfCellReferenceAbsent(Cell cell)
         {
-            if (!ExcelCellAnalyzer.IsCellReferencePresent(cell.Value))
+            if (!ExcelCellAnalyzer.IsCellReferencePresent(cell.CellValue))
             {
-                cell.Type = CellType.Number;
-                cell.Value = CellExpression.Calculate(cell);
+                cell.CellType = CellTypeEnum.Number;
+                cell.CellValue = CellExpression.Calculate(cell);
                 cell.IsCalculated = true;
             }
         }
 
-        /// <summary>
-        ///     Get the cell by cell reference.
-        /// </summary>
-        /// <param name="cellReference">The cell reference.</param>
-        /// <returns></returns>
         public Cell GetCell(string cellReference)
         {
             foreach (var cell in Cells)
@@ -123,17 +100,6 @@ namespace AS.EX.Data.ExcelData
                 }
             }
             throw new ArgumentException("Cell not found");
-        }
-
-        /// <summary>
-        ///     Returns a <see cref="System.String" /> that represents this instance.
-        /// </summary>
-        /// <returns>
-        ///     A <see cref="System.String" /> that represents this instance.
-        /// </returns>
-        public override string ToString()
-        {
-            return $"ColumnLength: {_columnLength}, RowLength: {_rowLength}, Cells: {Cells.Count}.";
         }
 
 

@@ -1,4 +1,5 @@
-﻿using AS.EX.Data.ExcelData.EnumTypes;
+﻿using System.Collections.Generic;
+using AS.EX.Data.ExcelData.EnumTypes;
 
 namespace AS.EX.Data.ExcelData.Converters
 {
@@ -6,18 +7,18 @@ namespace AS.EX.Data.ExcelData.Converters
     {
         public static string CellNumberToColumnName(int columnNumber)
         {
-            return CellColumnNameConverter.GetLetter(columnNumber);
+            return CellColumnNameConverter.GetLetterByNumber(columnNumber);
         }
 
 
-        public static string CastReferenceToValue(CellTable cells, Cell expressionCell)
+        public static string ConvertCellReferenceToValue(CellTable table, Cell expressionCell)
         {
-            return CellValueConverter.CastReferenceToValue(cells, expressionCell);
+            return CellValueConverter.ConvertCellReferenceToValue(table, expressionCell);
         }
 
-        public static ArithmeticType ToArithmeticType(char value)
+        public static ArithmeticTypeEnum ToArithmeticType(char value)
         {
-            return (ArithmeticType)value;
+            return (ArithmeticTypeEnum)value;
         }
     }
 }

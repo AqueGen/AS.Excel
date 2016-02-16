@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using AS.EX.Data.Consts;
 using AS.EX.Data.ExcelData.Analyzers;
 using AS.EX.Data.ExcelData.Converters;
 using AS.EX.Data.ExcelData.EnumTypes;
@@ -7,164 +9,86 @@ namespace AS.EX.Data.ExcelData
 {
     public class Cell
     {
-        private const int FirstRowInExcel = 1;
 
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="Cell" /> class.
-        /// </summary>
-        /// <param name="column">The column.</param>
-        /// <param name="row">The row.</param>
-        public Cell(int column, int row)
+        public int ColumnIndex { get; set; }
+        public int RowIndex { get; set; }
+
+        public CellTypeEnum CellType { get; set; }
+        public string CellValue { get; set; }
+
+        public bool IsCalculated { get; set; }
+
+        public string ColumnName { get; private set; }
+
+
+        public Cell(int column, int row, CellProperties properties)
         {
             ColumnIndex = column;
             RowIndex = row;
+            CellType = properties.CellType;
+            CellValue = properties.CellValue;
+            IsCalculated = properties.IsCalculated;
+
+            SetupProperties();
         }
 
-        /// <summary>
-        ///     Gets the cell coordinate.
-        /// </summary>
-        /// <value>
-        ///     The cell coordinate.
-        /// </value>
+
+        private void SetupProperties()
+        {
+            SetupColumnName();
+        }
+
+        private void SetupColumnName()
+        {
+            ColumnName = Converter.CellNumberToColumnName(ColumnIndex);
+        }
+
         public string GetCellCoordinate()
         {
-            var rowNumber = RowIndex + FirstRowInExcel;
+            int rowNumber = RowIndex + TableCellConst.StartRowIndex;
             return ColumnName + rowNumber;
         }
 
-        /// <summary>
-        ///     Gets or sets the index of the column.
-        /// </summary>
-        /// <value>
-        ///     The index of the column.
-        /// </value>
-        public int ColumnIndex { get; set; }
 
-        /// <summary>
-        ///     Gets the name of the column.
-        /// </summary>
-        /// <value>
-        ///     The name of the column.
-        /// </value>
-        public string ColumnName
+        private static void ErrorCellIfNegativeNumber(Cell cell)
         {
-            get { return Converter.CellNumberToColumnName(ColumnIndex); }
+            var value = Convert.ToInt32(cell.CellValue);
+            if (value < 0)
+            {
+                cell.SetCellErrorState("Negative number");
+            }
         }
 
-        /// <summary>
-        ///     Gets or sets a value indicating whether this instance is calculated.
-        /// </summary>
-        /// <value>
-        ///     <c>true</c> if this instance is calculated; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsCalculated { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the index of the row.
-        /// </summary>
-        /// <value>
-        ///     The index of the row.
-        /// </value>
-        public int RowIndex { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the type.
-        /// </summary>
-        /// <value>
-        ///     The type.
-        /// </value>
-        public CellType Type { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the value.
-        /// </summary>
-        /// <value>
-        ///     The value.
-        /// </value>
-        public string Value { get; set; }
-
-
-        /// <summary>
-        ///     Sets the variables.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <param name="type">The type.</param>
-        /// <param name="isCalculated">if set to <c>true</c> [is calculated].</param>
-        public void SetVariables(string value, CellType type, bool isCalculated)
-        {
-            Value = value;
-            Type = type;
-            IsCalculated = !ExcelCellAnalyzer.IsCellReferencePresent(Value) && !ExcelCellAnalyzer.IsArithmeticOperationPresent(value);
-        }
-
-        /// <summary>
-        ///     Determines whether [is cell has reference to itself].
-        /// </summary>
-        /// <returns></returns>
-        public bool IsCellHasReferenceToItself()
+        public bool ErrorCellIfCellHasReferenceToItself()
         {
             var isReferenceToItSelfPresent = false;
 
-            if (Value != null)
+            if (CellValue != null)
             {
-                var values = Value.Split(OperationAnalyzer.GetOperationSymbols());
+                string[] values = CellValue.Split(OperationAnalyzer.GetOperationSymbols());
 
-                if (values.Contains(GetCellCoordinate()))
+                if (values.ToArray().Contains(GetCellCoordinate()))
                 {
                     isReferenceToItSelfPresent = true;
-                    Type = CellType.Error;
+                    CellType = CellTypeEnum.Error;
                 }
             }
 
             return isReferenceToItSelfPresent;
         }
 
-        /// <summary>
-        ///     Sets the state of the cell error.
-        /// </summary>
-        /// <param name="errorMessage">The error message.</param>
         public void SetCellErrorState(string errorMessage)
         {
             const string errorFirstSymbol = "#";
 
-            IsCalculated = true;
-            Type = CellType.Error;
-            Value = errorFirstSymbol + errorMessage;
+            CellType = CellTypeEnum.Error;
+            CellValue = errorFirstSymbol + errorMessage;
         }
 
-        #region Overload binnary operations
-        public static Cell operator +(Cell obj1, Cell obj2)
-        {
-            return new Cell(1, 1);
-        }
 
-        public static Cell operator -(Cell obj1, Cell obj2)
-        {
-            return new Cell(1, 1);
-        }
-
-        public static Cell operator /(Cell obj1, Cell obj2)
-        {
-            return new Cell(1, 1);
-        }
-
-        public static Cell operator *(Cell obj1, Cell obj2)
-        {
-            return new Cell(1, 1);
-        }
-        #endregion Overload binnary operations
-
-
-        /// <summary>
-        ///     Returns a <see cref="System.String" /> that represents this instance.
-        /// </summary>
-        /// <returns>
-        ///     A <see cref="System.String" /> that represents this instance.
-        /// </returns>
         public override string ToString()
         {
-            return
-                $"CellReference: {GetCellCoordinate()}, ColumnIndex: {ColumnIndex}, ColumnName: {ColumnName}, IsCalculated: {IsCalculated}, RowIndex: {RowIndex}, Type: {Type}, Value: {Value}.";
+            return $"Cell: {GetCellCoordinate()}, CellType: {CellType}, IsCalculated: {IsCalculated}, CellValue: {CellValue}";
         }
     }
 }

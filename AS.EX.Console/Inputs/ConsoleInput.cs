@@ -110,7 +110,7 @@ namespace AS.EX.Console.Inputs
 
                 for (var columnIndex = 0; columnIndex < values.Length; columnIndex++)
                 {
-                    Cells.Add(new Cell(rowIndex, columnIndex) { Value = values[columnIndex] });
+                    Cells.Add(new Cell(rowIndex, columnIndex, new CellProperties(values[columnIndex])) );
                 }
             }
         }

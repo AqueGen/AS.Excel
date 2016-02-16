@@ -12,7 +12,7 @@ namespace AS.EX.Data.ExcelData.Converters
         /// </summary>
         /// <param name="columnNumber">The column number.</param>
         /// <returns></returns>
-        internal static string GetLetter(int columnNumber)
+        internal static string GetLetterByNumber(int columnNumber)
         {
             string columnName = string.Empty;
 

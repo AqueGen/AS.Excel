@@ -33,9 +33,9 @@ namespace AS.EX.Data.ExcelData.Calculates
             var totalValue = Convert.ToInt32(numbers[0]);
             for (var i = 1; i <= operations.Length; i++)
             {
-                ArithmeticType arithmeticType = Converter.ToArithmeticType(operations[i - differentLength]);
+                ArithmeticTypeEnum arithmeticTypeEnum = Converter.ToArithmeticType(operations[i - differentLength]);
                 var nextNumber = Convert.ToInt32(numbers[i]);
-                totalValue = CellArithmeticCalculation.CalculateNumber(totalValue, arithmeticType, nextNumber);
+                totalValue = CellArithmeticCalculation.CalculateNumber(totalValue, arithmeticTypeEnum, nextNumber);
             }
             return totalValue.ToString();
         }
@@ -57,7 +57,7 @@ namespace AS.EX.Data.ExcelData.Calculates
             {
                 Value = string.Empty,
                 IsNextShouldBeNumber = false,
-                Chars = cell.Value.ToCharArray()
+                Chars = cell.CellValue.ToCharArray()
             };
 
 
