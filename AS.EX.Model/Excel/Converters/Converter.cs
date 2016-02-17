@@ -13,9 +13,9 @@ namespace AS.EX.Model.Excel.Converters
         }
 
 
-        public static string ConvertCellReferenceToValue(CellTable table, ICell cell)
+        public static void ConvertCellReferenceToValue(CellTable table, ICell cell)
         {
-            return CellValueConverter.ConvertCellReferenceToValue(table, cell);
+            CellValueConverter.ConvertCellReferenceToValue(table, cell);
         }
 
         public static ArithmeticTypeEnum ToArithmeticType(char value)

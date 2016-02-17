@@ -14,10 +14,7 @@ namespace AS.EX.Model.Excel.Calculates
     /// </summary>
     public class CellExpression
     {
-        private const int ZeroIndex = 0;
 
-
-        private static readonly char[] AllNumbers = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
 
         /// <summary>
         ///     Calculates the expression.
@@ -85,7 +82,7 @@ namespace AS.EX.Model.Excel.Calculates
         {
             if (expressionValue == null) throw new ArgumentNullException(nameof(expressionValue));
 
-            if (AllNumbers.Contains(expressionValue.Chars[expressionValue.Index]))
+            if (CellConst.AllNumbers.Contains(expressionValue.Chars[expressionValue.Index]))
             {
                 expressionValue.Value += expressionValue.Chars[expressionValue.Index];
                 expressionValue.IsNextShouldBeNumber = false;
@@ -99,7 +96,7 @@ namespace AS.EX.Model.Excel.Calculates
             if (nums == null) throw new ArgumentNullException(nameof(nums));
             if (expressionValue == null) throw new ArgumentNullException(nameof(expressionValue));
 
-            if (expressionValue.Index == ZeroIndex)
+            if (expressionValue.Index == CellConst.ZeroIndex)
             {
                 expressionValue.Value = expressionValue.Chars[expressionValue.Index].ToString();
             }

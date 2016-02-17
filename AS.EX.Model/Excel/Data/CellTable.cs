@@ -20,6 +20,8 @@ namespace AS.EX.Model.Excel.Data
 
         public void AddCell(ICell cell)
         {
+            if (cell == null) throw new ArgumentNullException(nameof(cell));
+
             Cells.Add(cell);
         }
 
@@ -45,15 +47,18 @@ namespace AS.EX.Model.Excel.Data
             {
                 string oldCellValue = cell.Value;
 
-                cell.Value = Converter.ConvertCellReferenceToValue(this, cell);
-
-                if (!ReferenceCellAnalyzer.IsCellReferencePresent(cell.Value))
+                try
                 {
-                    CalculateNumbers(cell);
+                    Converter.ConvertCellReferenceToValue(this, cell);
+                    cell.CheckReferenceToItSelf();
+                }
+                catch (Exception e)
+                {
+                    cell.SetErrorValue(e.Message);
                 }
 
-                ThrowIfCellHasReferenceToItSelf(cell);
-
+                CalculateNumbers(cell);
+                
                 if(!isChangedCellValue)
                 {
                     isChangedCellValue = IsChangedValue(cell.Value, oldCellValue);
@@ -61,23 +66,18 @@ namespace AS.EX.Model.Excel.Data
             }
         }
 
-        private static void ThrowIfCellHasReferenceToItSelf(ICell cell)
-        {
-            if (cell == null) throw new ArgumentNullException(nameof(cell));
 
-            if (cell.IsHasReferenceToItself())
-            {
-                cell.SetErrorValue("Reference To Self Cell");
-            }
-        }
 
         private static void CalculateNumbers(ICell cell)
         {
             if (cell == null) throw new ArgumentNullException(nameof(cell));
 
-            cell.Type = CellTypeEnum.Number;
-            cell.Value = CellExpression.Calculate(cell);
-            cell.IsCalculated = true;
+            if (!ReferenceCellAnalyzer.IsCellReferencePresent(cell.Value) && cell.Type != CellTypeEnum.Error)
+            {
+                cell.Type = CellTypeEnum.Number;
+                cell.Value = CellExpression.Calculate(cell);
+                cell.IsCalculated = true;
+            }
         }
 
         public ICell GetCell(string cellReference)

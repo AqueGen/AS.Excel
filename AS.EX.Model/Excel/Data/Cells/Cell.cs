@@ -58,6 +58,14 @@ namespace AS.EX.Model.Excel.Data.Cells
             return isReferenceToItSelfPresent;
         }
 
+        public void CheckReferenceToItSelf()
+        {
+            if (IsHasReferenceToItself())
+            {
+                throw new ApplicationException("Reference to itself");
+            }
+        }
+
         public void SetErrorValue(string errorMessage)
         {
             if (String.IsNullOrWhiteSpace(errorMessage))

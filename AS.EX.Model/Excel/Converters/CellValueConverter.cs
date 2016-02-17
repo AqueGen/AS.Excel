@@ -1,4 +1,5 @@
-﻿using AS.EX.Model.Consts;
+﻿using System;
+using AS.EX.Model.Consts;
 using AS.EX.Model.Excel.Analyzers;
 using AS.EX.Model.Excel.Data;
 using AS.EX.Model.Excel.Data.Cells;
@@ -9,31 +10,49 @@ namespace AS.EX.Model.Excel.Converters
 {
     public class CellValueConverter
     {
-        public static string ConvertCellReferenceToValue(CellTable table, ICell cell)
+        public static void ConvertCellReferenceToValue(ITable table, ICell cell)
         {
-            string value = cell.Value;
+            if (table == null) throw new ArgumentNullException(nameof(table));
+            if (cell == null) throw new ArgumentNullException(nameof(cell));
+
             string[] parts = cell.Value.Split(CellConst.OperationSymbols);
+
+            CheckExpressionParts(cell, parts);
 
             foreach (string part in parts)
             {
-                if (ReferenceCellAnalyzer.IsCellReferencePresent(part) && cell.Type != CellTypeEnum.Error)
+                if(cell.Type != CellTypeEnum.Error && ReferenceCellAnalyzer.IsCellReferencePresent(part))
                 {
-                    value = ReplaceReferenceToValue(table, value, part);
+                    ReplaceReferenceToValue(table, cell, part);
                 }
             }
-            return value;
         }
 
-        private static string ReplaceReferenceToValue(CellTable table, string value, string part)
+
+        private static void ReplaceReferenceToValue(ITable table, ICell cell, string part)
         {
-            ICell cell = table.GetCell(part);
-            string newValue = value;
-            if (cell?.Value != null && cell.IsCalculated)
+            ICell foundCell = table.GetCell(part);
+
+            if (foundCell?.Type == CellTypeEnum.Error)
             {
-                newValue = value.Replace(part, cell.Value);
+                cell.SetErrorValue("Reference cell with error");
             }
 
-            return newValue;
+            if (foundCell?.Value != null && foundCell.IsCalculated)
+            {
+                cell.Value = cell.Value.Replace(part, foundCell.Value);
+            }
         }
+
+
+        private static void CheckExpressionParts(ICell cell, string[] parts)
+        {
+            string firstSymbol = cell.Value.Substring(0, 1);
+            if (firstSymbol.Equals("*") || firstSymbol.Equals("/"))
+            {
+                cell.SetErrorValue("First symbol can not be multiple or divide");
+            }
+        }
+
     }
 }

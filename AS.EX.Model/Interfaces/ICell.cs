@@ -12,5 +12,6 @@ namespace AS.EX.Model.Interfaces
         bool IsHasReferenceToItself();
         void SetErrorValue(string message);
         string GetCellCoordinate();
+        void CheckReferenceToItSelf();
     }
 }

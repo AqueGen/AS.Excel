@@ -8,23 +8,12 @@ namespace AS.EX.Model.Excel.Analyzers.CellProperties
     {
         public static CellTypeEnum GetCellType(string value)
         {
-            if (String.IsNullOrWhiteSpace(value))
-                throw new ArgumentException("Argument is null or whitespace", nameof(value));
+            if (value == null) throw new ArgumentNullException(nameof(value));
 
             if (string.IsNullOrWhiteSpace(value))
             {
                return CellTypeEnum.Empty;
             }
-
-            CellTypeEnum typeEnum = GetValueType(value);
-            return typeEnum;
-        }
-
-
-        private static CellTypeEnum GetValueType(string value)
-        {
-            if (String.IsNullOrWhiteSpace(value))
-                throw new ArgumentException("Argument is null or whitespace", nameof(value));
 
             const int startIndex = 0;
             const int firstSymbolIndex = 1;
@@ -33,7 +22,7 @@ namespace AS.EX.Model.Excel.Analyzers.CellProperties
 
             if (firstSymbol.Equals(CellConst.ExpressionSymbol))
             {
-               return CellTypeEnum.Expression;
+                return CellTypeEnum.Expression;
             }
             if (firstSymbol.Equals(CellConst.TextSymbol))
             {

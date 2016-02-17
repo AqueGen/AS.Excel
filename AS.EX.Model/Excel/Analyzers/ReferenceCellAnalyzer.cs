@@ -9,15 +9,14 @@ namespace AS.EX.Model.Excel.Analyzers
         /// <summary>
         ///     Determines whether [is cell reference present] [the specified text].
         /// </summary>
-        /// <param name="text">The text.</param>
+        /// <param name="cellReferenceName">The text.</param>
         /// <returns></returns>
-        public static bool IsCellReferencePresent(string text)
+        public static bool IsCellReferencePresent(string cellReferenceName)
         {
-            if (String.IsNullOrWhiteSpace(text))
-                throw new ArgumentException("Argument is null or whitespace", nameof(text));
+            if (String.IsNullOrWhiteSpace(cellReferenceName)) throw new ArgumentException("Cell reference can not be empty");
 
             var regex = new Regex("[A-Z]{1}[0-9]{1}");
-            var isMatch = regex.IsMatch(text);
+            var isMatch = regex.IsMatch(cellReferenceName);
             return isMatch;
         }
 
