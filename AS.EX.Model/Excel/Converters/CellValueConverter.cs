@@ -1,8 +1,6 @@
 ﻿using System;
 using AS.EX.Model.Consts;
 using AS.EX.Model.Excel.Analyzers;
-using AS.EX.Model.Excel.Data;
-using AS.EX.Model.Excel.Data.Cells;
 using AS.EX.Model.Excel.EnumTypes;
 using AS.EX.Model.Interfaces;
 
@@ -17,11 +15,11 @@ namespace AS.EX.Model.Excel.Converters
 
             string[] parts = cell.Value.Split(CellConst.OperationSymbols);
 
-            CheckExpressionParts(cell, parts);
+            CheckExpressionParts(cell);
 
             foreach (string part in parts)
             {
-                if(cell.Type != CellTypeEnum.Error && ReferenceCellAnalyzer.IsCellReferencePresent(part))
+                if (cell.Type != CellTypeEnum.Error && ReferenceCellAnalyzer.IsCellReferencePresent(part))
                 {
                     ReplaceReferenceToValue(table, cell, part);
                 }
@@ -45,7 +43,7 @@ namespace AS.EX.Model.Excel.Converters
         }
 
 
-        private static void CheckExpressionParts(ICell cell, string[] parts)
+        private static void CheckExpressionParts(ICell cell)
         {
             string firstSymbol = cell.Value.Substring(0, 1);
             if (firstSymbol.Equals("*") || firstSymbol.Equals("/"))
@@ -53,6 +51,5 @@ namespace AS.EX.Model.Excel.Converters
                 cell.SetErrorValue("First symbol can not be multiple or divide");
             }
         }
-
     }
 }

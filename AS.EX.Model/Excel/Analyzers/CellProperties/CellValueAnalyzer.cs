@@ -22,7 +22,6 @@ namespace AS.EX.Model.Excel.Analyzers.CellProperties
                 if (type == CellTypeEnum.Text)
                 {
                     expressionSymbolLength = CellConst.TextSymbol.Length;
-
                 }
                 newValue = value.Substring(expressionSymbolLength, value.Length - 1);
             }

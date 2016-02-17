@@ -21,7 +21,7 @@ namespace AS.EX.Console
             input.RowCount = 4;
             input.ColumnCount = 4;
 
-            input.StartInput();
+            //input.StartInput();
 
             ITable table = new CellTable();
             //List<ICellProperties> propertieses = new List<ICellProperties>
@@ -40,35 +40,23 @@ namespace AS.EX.Console
             //    new CellProperties("'Sheet")
             //};
 
-            //List<ICellProperties> propertieses = new List<ICellProperties>
-            //{
-            //    new CellProperties("1"),
-            //    new CellProperties("=A1*5-7*A1"),
-            //    new CellProperties("3"),
-            //    new CellProperties("'Sample"),
-            //};
+            List<ICellProperties> propertieses = new List<ICellProperties>
+            {
+                new CellProperties("1"),
+                new CellProperties("=1*5-7*2"),
+                new CellProperties("3"),
+                new CellProperties("'Sample"),
+            };
 
-            //foreach (var properti in propertieses)
-            //{
-            //    properti.SetupProperties();
-            //}
+            foreach (var properti in propertieses)
+            {
+                properti.SetupProperties();
+            }
 
-
-            //List<ICell> cells = new List<ICell>
-            //{
-            //    new Cell(0, 0, propertieses[0]),
-            //    new Cell(1, 0, propertieses[1]),
-            //    new Cell(2, 0, propertieses[2]),
-            //    new Cell(3, 0, propertieses[3]),
-            //};
-
-            //foreach (ICell cell in cells)
-            //{
-                
-            //    input.Cells.Add(cell);
-            //}
-
-
+            input.Cells.Add(new Cell(0, 0, propertieses[0]));
+            input.Cells.Add(new Cell(1, 0, propertieses[1]));
+            input.Cells.Add(new Cell(2, 0, propertieses[2]));
+            input.Cells.Add(new Cell(3, 0, propertieses[3]));
 
             foreach (ICell cell in input.Cells)
             {

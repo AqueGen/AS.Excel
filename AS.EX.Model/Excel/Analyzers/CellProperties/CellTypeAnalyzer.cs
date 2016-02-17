@@ -12,7 +12,7 @@ namespace AS.EX.Model.Excel.Analyzers.CellProperties
 
             if (string.IsNullOrWhiteSpace(value))
             {
-               return CellTypeEnum.Empty;
+                return CellTypeEnum.Empty;
             }
 
             const int startIndex = 0;
@@ -31,6 +31,5 @@ namespace AS.EX.Model.Excel.Analyzers.CellProperties
 
             return CellTypeEnum.Number;
         }
-
     }
 }

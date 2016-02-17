@@ -19,6 +19,7 @@ namespace AS.EX.Model.Excel.Data.Cells
         public bool IsCalculated { get; set; }
 
         public string ColumnName { get; private set; }
+
         public Cell(int column, int row, ICellProperties properties)
         {
             if (properties == null) throw new ArgumentNullException(nameof(properties));
@@ -68,7 +69,7 @@ namespace AS.EX.Model.Excel.Data.Cells
 
         public void SetErrorValue(string errorMessage)
         {
-            if (String.IsNullOrWhiteSpace(errorMessage))
+            if (string.IsNullOrWhiteSpace(errorMessage))
                 throw new ArgumentException("Argument is null or whitespace", nameof(errorMessage));
 
             const string errorFirstSymbol = "#";

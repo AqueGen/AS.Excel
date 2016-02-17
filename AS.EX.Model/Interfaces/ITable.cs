@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using AS.EX.Model.Excel.Data.Cells;
 
 namespace AS.EX.Model.Interfaces
 {
@@ -7,7 +6,7 @@ namespace AS.EX.Model.Interfaces
     {
         void AddCell(ICell cell);
         void CalculateCells();
-        List<ICell> Cells { get;}
+        List<ICell> Cells { get; }
 
         ICell GetCell(string cellReference);
     }

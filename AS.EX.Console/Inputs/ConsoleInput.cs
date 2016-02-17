@@ -91,7 +91,7 @@ namespace AS.EX.Console.Inputs
             ThrowIfIntegerLessOrEqualZero(RowCount, nameof(RowCount));
             ThrowIfIntegerLessOrEqualZero(ColumnCount, nameof(ColumnCount));
 
-             System.Console.WriteLine($@"Table size is: Row = {RowCount}, Count = {ColumnCount}");   
+            System.Console.WriteLine($@"Table size is: Row = {RowCount}, Count = {ColumnCount}");
         }
 
         private void ThrowIfIntegerLessOrEqualZero(int number, string parameter)

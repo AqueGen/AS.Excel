@@ -10,7 +10,6 @@ namespace AS.EX.Model.Excel.Data
 {
     public class CellTable : ITable
     {
-
         public CellTable()
         {
             Cells = new List<ICell>();
@@ -59,15 +58,13 @@ namespace AS.EX.Model.Excel.Data
                     cell.SetErrorValue(e.Message);
                 }
 
-                
-                
-                if(!isChangedCellValue)
+
+                if (!isChangedCellValue)
                 {
                     isChangedCellValue = IsChangedValue(cell.Value, oldCellValue);
                 }
             }
         }
-
 
 
         private static void CalculateNumbers(ICell cell)
@@ -84,7 +81,7 @@ namespace AS.EX.Model.Excel.Data
 
         public ICell GetCell(string cellReference)
         {
-            if (String.IsNullOrWhiteSpace(cellReference))
+            if (string.IsNullOrWhiteSpace(cellReference))
                 throw new ArgumentException("Argument is null or whitespace", nameof(cellReference));
 
             foreach (var cell in Cells)
@@ -100,9 +97,9 @@ namespace AS.EX.Model.Excel.Data
 
         private static bool IsChangedValue(string currentValue, string previousValue)
         {
-            if (String.IsNullOrWhiteSpace(currentValue))
+            if (string.IsNullOrWhiteSpace(currentValue))
                 throw new ArgumentException("Argument is null or whitespace", nameof(currentValue));
-            if (String.IsNullOrWhiteSpace(previousValue))
+            if (string.IsNullOrWhiteSpace(previousValue))
                 throw new ArgumentException("Argument is null or whitespace", nameof(previousValue));
 
             return !currentValue.Equals(previousValue);

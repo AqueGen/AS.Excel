@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using AS.EX.Model.Consts;
 using AS.EX.Model.Excel.Converters;
-using AS.EX.Model.Excel.Data.Cells;
 using AS.EX.Model.Excel.EnumTypes;
 using AS.EX.Model.Interfaces;
 
@@ -14,8 +13,6 @@ namespace AS.EX.Model.Excel.Calculates
     /// </summary>
     public class CellExpression
     {
-
-
         /// <summary>
         ///     Calculates the expression.
         /// </summary>

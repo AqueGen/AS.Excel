@@ -1,5 +1,4 @@
-﻿using System;
-using AS.EX.Model.Excel.EnumTypes;
+﻿using AS.EX.Model.Excel.EnumTypes;
 
 namespace AS.EX.Model.Excel.Analyzers.CellProperties
 {
@@ -12,6 +11,6 @@ namespace AS.EX.Model.Excel.Analyzers.CellProperties
                 return false;
             }
             return true;
-        } 
+        }
     }
 }

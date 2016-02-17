@@ -9,7 +9,7 @@ namespace AS.EX.Model.Excel.Data.Cells.Properties
     {
         private readonly string _value;
 
-        public CellTypeEnum Type {get; set; }
+        public CellTypeEnum Type { get; set; }
         public string Value { get; set; }
         public bool IsCalculated { get; set; }
 

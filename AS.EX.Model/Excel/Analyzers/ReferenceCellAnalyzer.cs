@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Text.RegularExpressions;
-using AS.EX.Model.Consts;
 
 namespace AS.EX.Model.Excel.Analyzers
 {
@@ -13,12 +12,12 @@ namespace AS.EX.Model.Excel.Analyzers
         /// <returns></returns>
         public static bool IsCellReferencePresent(string cellReferenceName)
         {
-            if (String.IsNullOrWhiteSpace(cellReferenceName)) throw new ArgumentException("Cell reference can not be empty");
+            if (string.IsNullOrWhiteSpace(cellReferenceName))
+                throw new ArgumentException("Cell reference can not be empty");
 
             var regex = new Regex("[A-Z]{1}[0-9]{1}");
             var isMatch = regex.IsMatch(cellReferenceName);
             return isMatch;
         }
-
     }
 }

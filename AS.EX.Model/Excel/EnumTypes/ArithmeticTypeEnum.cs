@@ -5,11 +5,10 @@
     /// </summary>
     public enum ArithmeticTypeEnum
     {
-
         /// <summary>
         ///     The Default state.
         /// </summary>
-        Default, 
+        Default,
 
         /// <summary>
         ///     The add math operation.
