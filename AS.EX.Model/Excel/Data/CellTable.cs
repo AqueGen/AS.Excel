@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using AS.EX.Model.Excel.Analyzers;
+﻿using AS.EX.Model.Excel.Analyzers;
 using AS.EX.Model.Excel.Calculates;
 using AS.EX.Model.Excel.Converters;
 using AS.EX.Model.Excel.EnumTypes;
 using AS.EX.Model.Interfaces;
+using System;
+using System.Collections.Generic;
 
 namespace AS.EX.Model.Excel.Data
 {
@@ -24,7 +24,6 @@ namespace AS.EX.Model.Excel.Data
             Cells.Add(cell);
         }
 
-
         public void CalculateCells()
         {
             bool isChangedCellValue;
@@ -36,6 +35,43 @@ namespace AS.EX.Model.Excel.Data
                     CalculateCell(ref isChangedCellValue, cell);
                 }
             } while (isChangedCellValue);
+        }
+
+        public ICell GetCell(string cellReference)
+        {
+            if (string.IsNullOrWhiteSpace(cellReference))
+                throw new ArgumentException("Argument is null or whitespace", nameof(cellReference));
+
+            foreach (var cell in Cells)
+            {
+                if (cell.GetCellCoordinate().Equals(cellReference))
+                {
+                    return cell;
+                }
+            }
+            throw new ArgumentException("Cell not found");
+        }
+
+        private static void CalculateNumbers(ICell cell)
+        {
+            if (cell == null) throw new ArgumentNullException(nameof(cell));
+
+            if (!ReferenceCellAnalyzer.IsCellReferencePresent(cell.Value) && cell.Type != CellTypeEnum.Error)
+            {
+                cell.Type = CellTypeEnum.Number;
+                cell.Value = CellExpression.Calculate(cell);
+                cell.IsCalculated = true;
+            }
+        }
+
+        private static bool IsChangedValue(string currentValue, string previousValue)
+        {
+            if (string.IsNullOrWhiteSpace(currentValue))
+                throw new ArgumentException("Argument is null or whitespace", nameof(currentValue));
+            if (string.IsNullOrWhiteSpace(previousValue))
+                throw new ArgumentException("Argument is null or whitespace", nameof(previousValue));
+
+            return !currentValue.Equals(previousValue);
         }
 
         private void CalculateCell(ref bool isChangedCellValue, ICell cell)
@@ -58,51 +94,11 @@ namespace AS.EX.Model.Excel.Data
                     cell.SetErrorValue(e.Message);
                 }
 
-
                 if (!isChangedCellValue)
                 {
                     isChangedCellValue = IsChangedValue(cell.Value, oldCellValue);
                 }
             }
-        }
-
-
-        private static void CalculateNumbers(ICell cell)
-        {
-            if (cell == null) throw new ArgumentNullException(nameof(cell));
-
-            if (!ReferenceCellAnalyzer.IsCellReferencePresent(cell.Value) && cell.Type != CellTypeEnum.Error)
-            {
-                cell.Type = CellTypeEnum.Number;
-                cell.Value = CellExpression.Calculate(cell);
-                cell.IsCalculated = true;
-            }
-        }
-
-        public ICell GetCell(string cellReference)
-        {
-            if (string.IsNullOrWhiteSpace(cellReference))
-                throw new ArgumentException("Argument is null or whitespace", nameof(cellReference));
-
-            foreach (var cell in Cells)
-            {
-                if (cell.GetCellCoordinate().Equals(cellReference))
-                {
-                    return cell;
-                }
-            }
-            throw new ArgumentException("Cell not found");
-        }
-
-
-        private static bool IsChangedValue(string currentValue, string previousValue)
-        {
-            if (string.IsNullOrWhiteSpace(currentValue))
-                throw new ArgumentException("Argument is null or whitespace", nameof(currentValue));
-            if (string.IsNullOrWhiteSpace(previousValue))
-                throw new ArgumentException("Argument is null or whitespace", nameof(previousValue));
-
-            return !currentValue.Equals(previousValue);
         }
     }
 }

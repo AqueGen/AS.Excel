@@ -33,7 +33,7 @@ namespace AS.EX.Model.Excel.Converters
 
         private static char GetFirstLetter(int columnNumber)
         {
-            int letter = GetLetterIndex(FirstExcelLetter) + columnNumber%GetAlphabetSize();
+            int letter = GetLetterIndex(FirstExcelLetter) + columnNumber % GetAlphabetSize();
             return Convert.ToChar(letter);
         }
 
@@ -45,7 +45,7 @@ namespace AS.EX.Model.Excel.Converters
         private static char GetSecondLetter(int columnNumber)
         {
             const int startIndex = -1;
-            int letter = GetLetterIndex(FirstExcelLetter) + startIndex + columnNumber/GetAlphabetSize();
+            int letter = GetLetterIndex(FirstExcelLetter) + startIndex + columnNumber / GetAlphabetSize();
             return Convert.ToChar(letter);
         }
     }

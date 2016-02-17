@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using AS.EX.Console.Outputs.Interfaces;
+﻿using AS.EX.Console.Outputs.Interfaces;
 using AS.EX.Model.Interfaces;
+using System;
+using System.Collections.Generic;
 
 namespace AS.EX.Console.Outputs
 {
     public class ConsoleOutput : IOutput
     {
-        private readonly int _row;
-        private readonly int _column;
         private readonly List<ICell> _cells;
+        private readonly int _column;
+        private readonly int _row;
 
         public ConsoleOutput(int row, int column, List<ICell> cells)
         {
@@ -17,12 +17,10 @@ namespace AS.EX.Console.Outputs
             if (column <= 0) throw new ArgumentOutOfRangeException(nameof(column));
             if (cells == null) throw new ArgumentNullException(nameof(cells));
 
-
             _row = row;
             _column = column;
             _cells = cells;
         }
-
 
         public void StartOutput()
         {

@@ -1,13 +1,16 @@
-﻿using System.Collections.Generic;
-using AS.EX.Model.Interfaces;
+﻿using AS.EX.Model.Interfaces;
+using System.Collections.Generic;
 
 namespace AS.EX.Console.Inputs.Interfaces
 {
     public interface IInput
     {
-        void StartInput();
-        int RowCount { get; set; }
-        int ColumnCount { get; set; }
         List<ICell> Cells { get; }
+
+        int ColumnCount { get; set; }
+
+        int RowCount { get; set; }
+
+        void StartInput();
     }
 }

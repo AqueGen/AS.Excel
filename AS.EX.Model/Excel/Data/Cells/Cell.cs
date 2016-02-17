@@ -1,25 +1,14 @@
-﻿using System;
-using System.Linq;
-using AS.EX.Model.Consts;
+﻿using AS.EX.Model.Consts;
 using AS.EX.Model.Excel.Converters;
 using AS.EX.Model.Excel.EnumTypes;
 using AS.EX.Model.Interfaces;
+using System;
+using System.Linq;
 
 namespace AS.EX.Model.Excel.Data.Cells
 {
     public class Cell : ICell
     {
-        public int ColumnIndex { get; set; }
-        public int RowIndex { get; set; }
-
-        public CellTypeEnum Type { get; set; }
-
-        public string Value { get; set; }
-
-        public bool IsCalculated { get; set; }
-
-        public string ColumnName { get; private set; }
-
         public Cell(int column, int row, ICellProperties properties)
         {
             if (properties == null) throw new ArgumentNullException(nameof(properties));
@@ -31,9 +20,21 @@ namespace AS.EX.Model.Excel.Data.Cells
             IsCalculated = properties.IsCalculated;
         }
 
-        public void SetupProperties()
+        public int ColumnIndex { get; set; }
+        public string ColumnName { get; private set; }
+        public bool IsCalculated { get; set; }
+        public int RowIndex { get; set; }
+
+        public CellTypeEnum Type { get; set; }
+
+        public string Value { get; set; }
+
+        public void CheckReferenceToItSelf()
         {
-            ColumnName = Converter.CellNumberToColumnName(ColumnIndex);
+            if (IsHasReferenceToItself())
+            {
+                throw new ApplicationException("Reference to itself");
+            }
         }
 
         public string GetCellCoordinate()
@@ -59,14 +60,6 @@ namespace AS.EX.Model.Excel.Data.Cells
             return isReferenceToItSelfPresent;
         }
 
-        public void CheckReferenceToItSelf()
-        {
-            if (IsHasReferenceToItself())
-            {
-                throw new ApplicationException("Reference to itself");
-            }
-        }
-
         public void SetErrorValue(string errorMessage)
         {
             if (string.IsNullOrWhiteSpace(errorMessage))
@@ -78,6 +71,10 @@ namespace AS.EX.Model.Excel.Data.Cells
             Value = errorFirstSymbol + errorMessage;
         }
 
+        public void SetupProperties()
+        {
+            ColumnName = Converter.CellNumberToColumnName(ColumnIndex);
+        }
 
         public override string ToString()
         {

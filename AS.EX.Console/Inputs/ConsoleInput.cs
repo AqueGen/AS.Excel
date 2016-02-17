@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using AS.EX.Console.Inputs.Interfaces;
+﻿using AS.EX.Console.Inputs.Interfaces;
 using AS.EX.Model.Excel.Data.Cells;
 using AS.EX.Model.Excel.Data.Cells.Properties;
 using AS.EX.Model.Interfaces;
+using System;
+using System.Collections.Generic;
 
 namespace AS.EX.Console.Inputs
 {
@@ -11,7 +11,6 @@ namespace AS.EX.Console.Inputs
     {
         private const int TableVariableCount = 2;
         private int _columnCount;
-
 
         private bool _isConfigure;
         private int _rowCount;
@@ -25,12 +24,12 @@ namespace AS.EX.Console.Inputs
         }
 
         /// <summary>
-        ///     Gets or sets the row count.
+        ///     Gets or sets the cells.
         /// </summary>
         /// <value>
-        ///     The row count.
+        ///     The cells.
         /// </value>
-        public int RowCount { get; set; }
+        public List<ICell> Cells { get; set; }
 
         /// <summary>
         ///     Gets or sets the column count.
@@ -41,12 +40,12 @@ namespace AS.EX.Console.Inputs
         public int ColumnCount { get; set; }
 
         /// <summary>
-        ///     Gets or sets the cells.
+        ///     Gets or sets the row count.
         /// </summary>
         /// <value>
-        ///     The cells.
+        ///     The row count.
         /// </value>
-        public List<ICell> Cells { get; set; }
+        public int RowCount { get; set; }
 
         /// <summary>
         ///     Starts the console input.
@@ -59,46 +58,19 @@ namespace AS.EX.Console.Inputs
             } while (!_isConfigure);
         }
 
-        private void StartConfigure()
+        private static string[] GetValueFromConsoleByTab()
         {
-            try
-            {
-                SetTableSize();
-                SetTableCells();
-                _isConfigure = true;
-            }
-            catch (Exception e)
-            {
-                System.Console.WriteLine($"\nException: {e.Message}. Try again.");
-                _isConfigure = false;
-            }
+            var consoleValue = System.Console.ReadLine();
+            var strings = consoleValue?.Split('\t');
+
+            return strings;
         }
 
-        private void SetTableSize()
+        private static void ThrowIfIncorrectInputSize(string[] array, int countInRow)
         {
-            System.Console.WriteLine(@"Enter table size: row, count");
-
-            var values = GetValueFromConsoleByTab();
-            ThrowIfIncorrectInputSize(values, TableVariableCount);
-
-            int.TryParse(values[0], out _rowCount);
-            RowCount = _rowCount;
-
-            int.TryParse(values[1], out _columnCount);
-            ColumnCount = _columnCount;
-
-
-            ThrowIfIntegerLessOrEqualZero(RowCount, nameof(RowCount));
-            ThrowIfIntegerLessOrEqualZero(ColumnCount, nameof(ColumnCount));
-
-            System.Console.WriteLine($@"Table size is: Row = {RowCount}, Count = {ColumnCount}");
-        }
-
-        private void ThrowIfIntegerLessOrEqualZero(int number, string parameter)
-        {
-            if (number <= 0)
+            if (array.Length != countInRow)
             {
-                throw new ArgumentException($@"{number} less than 0 in parameter {parameter}");
+                throw new ArgumentException($@"Incorrect input value size. Should be {countInRow} values in row");
             }
         }
 
@@ -123,22 +95,46 @@ namespace AS.EX.Console.Inputs
             }
         }
 
-
-        private static void ThrowIfIncorrectInputSize(string[] array, int countInRow)
+        private void SetTableSize()
         {
-            if (array.Length != countInRow)
+            System.Console.WriteLine(@"Enter table size: row, count");
+
+            var values = GetValueFromConsoleByTab();
+            ThrowIfIncorrectInputSize(values, TableVariableCount);
+
+            int.TryParse(values[0], out _rowCount);
+            RowCount = _rowCount;
+
+            int.TryParse(values[1], out _columnCount);
+            ColumnCount = _columnCount;
+
+            ThrowIfIntegerLessOrEqualZero(RowCount, nameof(RowCount));
+            ThrowIfIntegerLessOrEqualZero(ColumnCount, nameof(ColumnCount));
+
+            System.Console.WriteLine($@"Table size is: Row = {RowCount}, Count = {ColumnCount}");
+        }
+
+        private void StartConfigure()
+        {
+            try
             {
-                throw new ArgumentException($@"Incorrect input value size. Should be {countInRow} values in row");
+                SetTableSize();
+                SetTableCells();
+                _isConfigure = true;
+            }
+            catch (Exception e)
+            {
+                System.Console.WriteLine($"\nException: {e.Message}. Try again.");
+                _isConfigure = false;
             }
         }
 
-
-        private static string[] GetValueFromConsoleByTab()
+        private void ThrowIfIntegerLessOrEqualZero(int number, string parameter)
         {
-            var consoleValue = System.Console.ReadLine();
-            var strings = consoleValue?.Split('\t');
-
-            return strings;
+            if (number <= 0)
+            {
+                throw new ArgumentException($@"{number} less than 0 in parameter {parameter}");
+            }
         }
     }
 }

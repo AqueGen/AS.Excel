@@ -1,6 +1,6 @@
-﻿using System;
-using AS.EX.Model.Consts;
+﻿using AS.EX.Model.Consts;
 using AS.EX.Model.Excel.EnumTypes;
+using System;
 
 namespace AS.EX.Model.Excel.Analyzers.CellProperties
 {

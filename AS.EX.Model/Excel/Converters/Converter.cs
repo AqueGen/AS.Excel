@@ -10,7 +10,6 @@ namespace AS.EX.Model.Excel.Converters
             return CellColumnNameConverter.GetLetterByNumber(columnNumber);
         }
 
-
         public static void ConvertCellReferenceToValue(ITable table, ICell cell)
         {
             CellValueConverter.ConvertCellReferenceToValue(table, cell);
@@ -18,7 +17,7 @@ namespace AS.EX.Model.Excel.Converters
 
         public static ArithmeticTypeEnum ToArithmeticType(char value)
         {
-            return (ArithmeticTypeEnum) value;
+            return (ArithmeticTypeEnum)value;
         }
     }
 }

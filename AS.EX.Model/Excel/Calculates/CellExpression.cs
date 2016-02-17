@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using AS.EX.Model.Consts;
+﻿using AS.EX.Model.Consts;
 using AS.EX.Model.Excel.Converters;
 using AS.EX.Model.Excel.EnumTypes;
 using AS.EX.Model.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace AS.EX.Model.Excel.Calculates
 {
@@ -86,7 +86,6 @@ namespace AS.EX.Model.Excel.Calculates
             }
         }
 
-
         private static void Operation(List<int> nums, List<char> opers, ref int num,
             ExpressionValue expressionValue)
         {
@@ -116,15 +115,15 @@ namespace AS.EX.Model.Excel.Calculates
 
         private class ExpressionValue
         {
-            public char[] Chars { get; }
-            public string Value { get; set; }
-            public bool IsNextShouldBeNumber { get; set; }
-            public int Index { get; set; }
-
             public ExpressionValue(char[] chars)
             {
                 Chars = chars;
             }
+
+            public char[] Chars { get; }
+            public int Index { get; set; }
+            public bool IsNextShouldBeNumber { get; set; }
+            public string Value { get; set; }
         }
     }
 }

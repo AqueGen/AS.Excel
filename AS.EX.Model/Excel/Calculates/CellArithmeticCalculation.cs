@@ -1,5 +1,5 @@
-﻿using System;
-using AS.EX.Model.Excel.EnumTypes;
+﻿using AS.EX.Model.Excel.EnumTypes;
+using System;
 
 namespace AS.EX.Model.Excel.Calculates
 {
@@ -14,12 +14,16 @@ namespace AS.EX.Model.Excel.Calculates
             {
                 case ArithmeticTypeEnum.Add:
                     return value1 + value2;
+
                 case ArithmeticTypeEnum.Subtract:
                     return value1 - value2;
+
                 case ArithmeticTypeEnum.Multiply:
-                    return value1*value2;
+                    return value1 * value2;
+
                 case ArithmeticTypeEnum.Divide:
-                    return value1/value2;
+                    return value1 / value2;
+
                 default:
                     throw new ArgumentException("Unknown operation symbol");
             }

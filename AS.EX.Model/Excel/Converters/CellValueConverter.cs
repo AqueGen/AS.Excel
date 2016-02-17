@@ -1,8 +1,8 @@
-﻿using System;
-using AS.EX.Model.Consts;
+﻿using AS.EX.Model.Consts;
 using AS.EX.Model.Excel.Analyzers;
 using AS.EX.Model.Excel.EnumTypes;
 using AS.EX.Model.Interfaces;
+using System;
 
 namespace AS.EX.Model.Excel.Converters
 {
@@ -26,6 +26,14 @@ namespace AS.EX.Model.Excel.Converters
             }
         }
 
+        private static void CheckExpressionParts(ICell cell)
+        {
+            string firstSymbol = cell.Value.Substring(0, 1);
+            if (firstSymbol.Equals("*") || firstSymbol.Equals("/"))
+            {
+                cell.SetErrorValue("First symbol can not be multiple or divide");
+            }
+        }
 
         private static void ReplaceReferenceToValue(ITable table, ICell cell, string part)
         {
@@ -39,16 +47,6 @@ namespace AS.EX.Model.Excel.Converters
             if (foundCell?.Value != null && foundCell.IsCalculated)
             {
                 cell.Value = cell.Value.Replace(part, foundCell.Value);
-            }
-        }
-
-
-        private static void CheckExpressionParts(ICell cell)
-        {
-            string firstSymbol = cell.Value.Substring(0, 1);
-            if (firstSymbol.Equals("*") || firstSymbol.Equals("/"))
-            {
-                cell.SetErrorValue("First symbol can not be multiple or divide");
             }
         }
     }

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using AS.EX.Console.Inputs;
+﻿using AS.EX.Console.Inputs;
 using AS.EX.Console.Inputs.Interfaces;
 using AS.EX.Console.Outputs;
 using AS.EX.Console.Outputs.Interfaces;
@@ -7,12 +6,13 @@ using AS.EX.Model.Excel.Data;
 using AS.EX.Model.Excel.Data.Cells;
 using AS.EX.Model.Excel.Data.Cells.Properties;
 using AS.EX.Model.Interfaces;
+using System.Collections.Generic;
 
 namespace AS.EX.Console
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             System.Console.WriteLine(@"Start Excel Program");
 
@@ -26,7 +26,7 @@ namespace AS.EX.Console
             ITable table = new CellTable();
             //List<ICellProperties> propertieses = new List<ICellProperties>
             //{
-            //    new CellProperties("12"),                
+            //    new CellProperties("12"),
             //    new CellProperties("=C2"),
             //    new CellProperties("3"),
             //    new CellProperties("'Sample"),

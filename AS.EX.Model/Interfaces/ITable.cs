@@ -4,9 +4,11 @@ namespace AS.EX.Model.Interfaces
 {
     public interface ITable
     {
-        void AddCell(ICell cell);
-        void CalculateCells();
         List<ICell> Cells { get; }
+
+        void AddCell(ICell cell);
+
+        void CalculateCells();
 
         ICell GetCell(string cellReference);
     }
