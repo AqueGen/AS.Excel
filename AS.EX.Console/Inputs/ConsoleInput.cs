@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using AS.EX.Console.Inputs.Interfaces;
 using AS.EX.Model.Excel;
+using AS.EX.Model.Excel.Data;
+using AS.EX.Model.Excel.Data.Properties;
 
 namespace AS.EX.Console.Inputs
 {

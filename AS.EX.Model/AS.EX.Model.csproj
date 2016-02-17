@@ -49,9 +49,9 @@
     <Compile Include="Excel\Analyzers\OperationAnalyzer.cs" />
     <Compile Include="Excel\Calculates\CellArithmeticCalculation.cs" />
     <Compile Include="Excel\Calculates\CellExpression.cs" />
-    <Compile Include="Excel\Cell.cs" />
-    <Compile Include="Excel\CellProperties.cs" />
-    <Compile Include="Excel\CellTable.cs" />
+    <Compile Include="Excel\Data\Cell.cs" />
+    <Compile Include="Excel\Data\Properties\CellProperties.cs" />
+    <Compile Include="Excel\Data\CellTable.cs" />
     <Compile Include="Excel\Converters\CellColumnNameConverter.cs" />
     <Compile Include="Excel\Converters\CellValueConverter.cs" />
     <Compile Include="Excel\Converters\Converter.cs" />

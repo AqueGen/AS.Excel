@@ -1,7 +1,7 @@
 ﻿using AS.EX.Model.Excel.Analyzers.CellProperties;
 using AS.EX.Model.Excel.EnumTypes;
 
-namespace AS.EX.Model.Excel
+namespace AS.EX.Model.Excel.Data.Properties
 {
     public class CellProperties
     {
@@ -25,21 +25,20 @@ namespace AS.EX.Model.Excel
             SetupIsCalculated();
         }
 
-        private void SetupIsCalculated()
-        {
-            IsCalculated = CellIsCalculatedAnalyzer.IsCalculated(CellType);
-        }
 
         private void SetupCellType()
         {
             CellType = CellTypeAnalyzer.GetCellType(_value);
         }
-
         private void SetupValue()
         {
             CellValue = CellValueAnalyzer.GetCellValue(CellType, _value);
         }
 
+        private void SetupIsCalculated()
+        {
+            IsCalculated = CellIsCalculatedAnalyzer.IsCalculated(CellType);
+        }
 
     }
 }

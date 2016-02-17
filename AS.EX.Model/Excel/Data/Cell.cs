@@ -3,9 +3,10 @@ using System.Linq;
 using AS.EX.Model.Consts;
 using AS.EX.Model.Excel.Analyzers;
 using AS.EX.Model.Excel.Converters;
+using AS.EX.Model.Excel.Data.Properties;
 using AS.EX.Model.Excel.EnumTypes;
 
-namespace AS.EX.Model.Excel
+namespace AS.EX.Model.Excel.Data
 {
     public class Cell
     {
@@ -49,19 +50,9 @@ namespace AS.EX.Model.Excel
             return ColumnName + rowNumber;
         }
 
-
-        private static void ErrorCellIfNegativeNumber(Cell cell)
+        public bool IsHasReferenceToItself()
         {
-            var value = Convert.ToInt32(cell.CellValue);
-            if (value < 0)
-            {
-                cell.SetCellErrorState("Negative number");
-            }
-        }
-
-        public bool ErrorCellIfCellHasReferenceToItself()
-        {
-            var isReferenceToItSelfPresent = false;
+            bool isReferenceToItSelfPresent = false;
 
             if (CellValue != null)
             {
@@ -70,14 +61,13 @@ namespace AS.EX.Model.Excel
                 if (values.ToArray().Contains(GetCellCoordinate()))
                 {
                     isReferenceToItSelfPresent = true;
-                    CellType = CellTypeEnum.Error;
                 }
             }
 
             return isReferenceToItSelfPresent;
         }
 
-        public void SetCellErrorState(string errorMessage)
+        public void SetErrorValue(string errorMessage)
         {
             const string errorFirstSymbol = "#";
 

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using AS.EX.Model.Excel;
+using AS.EX.Model.Excel.Data;
 
 namespace AS.EX.Console.Inputs.Interfaces
 {

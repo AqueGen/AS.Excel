@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AS.EX.Model.Excel.Analyzers;
 using AS.EX.Model.Excel.Converters;
+using AS.EX.Model.Excel.Data;
 using AS.EX.Model.Excel.EnumTypes;
 
 namespace AS.EX.Model.Excel.Calculates
