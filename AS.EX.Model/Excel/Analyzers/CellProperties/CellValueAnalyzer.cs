@@ -1,4 +1,5 @@
-﻿using AS.EX.Model.Consts;
+﻿using System;
+using AS.EX.Model.Consts;
 using AS.EX.Model.Excel.EnumTypes;
 
 namespace AS.EX.Model.Excel.Analyzers.CellProperties
@@ -7,6 +8,8 @@ namespace AS.EX.Model.Excel.Analyzers.CellProperties
     {
         public static string GetCellValue(CellTypeEnum type, string value)
         {
+            if (string.IsNullOrWhiteSpace(value))
+                throw new ArgumentException("Argument is null or whitespace", nameof(value));
 
             string newValue = value;
 

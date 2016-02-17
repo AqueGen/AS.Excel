@@ -4,20 +4,21 @@ using AS.EX.Model.Excel.Analyzers;
 using AS.EX.Model.Excel.Calculates;
 using AS.EX.Model.Excel.Converters;
 using AS.EX.Model.Excel.EnumTypes;
+using AS.EX.Model.Interfaces;
 
 namespace AS.EX.Model.Excel.Data
 {
-    public class CellTable
+    public class CellTable : ITable
     {
 
         public CellTable()
         {
-            Cells = new List<Cell>();
+            Cells = new List<ICell>();
         }
 
-        public List<Cell> Cells { get; set; }
+        public List<ICell> Cells { get; set; }
 
-        public void AddCell(Cell cell)
+        public void AddCell(ICell cell)
         {
             Cells.Add(cell);
         }
@@ -36,15 +37,17 @@ namespace AS.EX.Model.Excel.Data
             } while (isChangedCellValue);
         }
 
-        private void CalculateCell(ref bool isChangedCellValue, Cell cell)
+        private void CalculateCell(ref bool isChangedCellValue, ICell cell)
         {
-            if (!cell.IsCalculated && cell.CellType != CellTypeEnum.Error)
+            if (cell == null) throw new ArgumentNullException(nameof(cell));
+
+            if (!cell.IsCalculated && cell.Type != CellTypeEnum.Error)
             {
-                string oldCellValue = cell.CellValue;
+                string oldCellValue = cell.Value;
 
-                cell.CellValue = Converter.ConvertCellReferenceToValue(this, cell);
+                cell.Value = Converter.ConvertCellReferenceToValue(this, cell);
 
-                if (!ExcelCellAnalyzer.IsCellReferencePresent(cell.CellValue))
+                if (!ReferenceCellAnalyzer.IsCellReferencePresent(cell.Value))
                 {
                     CalculateNumbers(cell);
                 }
@@ -53,28 +56,35 @@ namespace AS.EX.Model.Excel.Data
 
                 if(!isChangedCellValue)
                 {
-                    isChangedCellValue = IsChangedValue(cell.CellValue, oldCellValue);
+                    isChangedCellValue = IsChangedValue(cell.Value, oldCellValue);
                 }
             }
         }
 
-        private static void ThrowIfCellHasReferenceToItSelf(Cell cell)
+        private static void ThrowIfCellHasReferenceToItSelf(ICell cell)
         {
+            if (cell == null) throw new ArgumentNullException(nameof(cell));
+
             if (cell.IsHasReferenceToItself())
             {
-                cell.SetErrorValue("ReferenceToSelfCell");
+                cell.SetErrorValue("Reference To Self Cell");
             }
         }
 
-        private static void CalculateNumbers(Cell cell)
+        private static void CalculateNumbers(ICell cell)
         {
-            cell.CellType = CellTypeEnum.Number;
-            cell.CellValue = CellExpression.Calculate(cell);
+            if (cell == null) throw new ArgumentNullException(nameof(cell));
+
+            cell.Type = CellTypeEnum.Number;
+            cell.Value = CellExpression.Calculate(cell);
             cell.IsCalculated = true;
         }
 
-        public Cell GetCell(string cellReference)
+        public ICell GetCell(string cellReference)
         {
+            if (String.IsNullOrWhiteSpace(cellReference))
+                throw new ArgumentException("Argument is null or whitespace", nameof(cellReference));
+
             foreach (var cell in Cells)
             {
                 if (cell.GetCellCoordinate().Equals(cellReference))
@@ -88,6 +98,11 @@ namespace AS.EX.Model.Excel.Data
 
         private static bool IsChangedValue(string currentValue, string previousValue)
         {
+            if (String.IsNullOrWhiteSpace(currentValue))
+                throw new ArgumentException("Argument is null or whitespace", nameof(currentValue));
+            if (String.IsNullOrWhiteSpace(previousValue))
+                throw new ArgumentException("Argument is null or whitespace", nameof(previousValue));
+
             return !currentValue.Equals(previousValue);
         }
     }

@@ -45,19 +45,21 @@
     <Compile Include="Excel\Analyzers\CellProperties\CellIsCalculatedAnalyzer.cs" />
     <Compile Include="Excel\Analyzers\CellProperties\CellTypeAnalyzer.cs" />
     <Compile Include="Excel\Analyzers\CellProperties\CellValueAnalyzer.cs" />
-    <Compile Include="Excel\Analyzers\ExcelCellAnalyzer.cs" />
-    <Compile Include="Excel\Analyzers\OperationAnalyzer.cs" />
+    <Compile Include="Excel\Analyzers\ReferenceCellAnalyzer.cs" />
     <Compile Include="Excel\Calculates\CellArithmeticCalculation.cs" />
     <Compile Include="Excel\Calculates\CellExpression.cs" />
-    <Compile Include="Excel\Data\Cell.cs" />
-    <Compile Include="Excel\Data\Properties\CellProperties.cs" />
+    <Compile Include="Excel\Data\Cells\Cell.cs" />
+    <Compile Include="Excel\Data\Cells\Properties\CellProperties.cs" />
     <Compile Include="Excel\Data\CellTable.cs" />
     <Compile Include="Excel\Converters\CellColumnNameConverter.cs" />
     <Compile Include="Excel\Converters\CellValueConverter.cs" />
     <Compile Include="Excel\Converters\Converter.cs" />
     <Compile Include="Excel\EnumTypes\ArithmeticTypeEnum.cs" />
     <Compile Include="Excel\EnumTypes\CellTypeEnum.cs" />
-    <Compile Include="Excel\EnumTypes\OperationTypeEnum.cs" />
+    <Compile Include="Interfaces\ICell.cs" />
+    <Compile Include="Interfaces\ICellProperties.cs" />
+    <Compile Include="Interfaces\IProperties.cs" />
+    <Compile Include="Interfaces\ITable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

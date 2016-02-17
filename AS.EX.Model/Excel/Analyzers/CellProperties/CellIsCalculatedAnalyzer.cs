@@ -1,4 +1,5 @@
-﻿using AS.EX.Model.Excel.EnumTypes;
+﻿using System;
+using AS.EX.Model.Excel.EnumTypes;
 
 namespace AS.EX.Model.Excel.Analyzers.CellProperties
 {

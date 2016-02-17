@@ -1,40 +1,36 @@
 ﻿using System;
 using System.Linq;
 using AS.EX.Model.Consts;
-using AS.EX.Model.Excel.Analyzers;
 using AS.EX.Model.Excel.Converters;
-using AS.EX.Model.Excel.Data.Properties;
 using AS.EX.Model.Excel.EnumTypes;
+using AS.EX.Model.Interfaces;
 
-namespace AS.EX.Model.Excel.Data
+namespace AS.EX.Model.Excel.Data.Cells
 {
-    public class Cell
+    public class Cell : ICell
     {
-
         public int ColumnIndex { get; set; }
         public int RowIndex { get; set; }
 
-        public CellTypeEnum CellType { get; set; }
-        public string CellValue { get; set; }
+        public CellTypeEnum Type { get; set; }
+
+        public string Value { get; set; }
 
         public bool IsCalculated { get; set; }
 
         public string ColumnName { get; private set; }
-
-
-        public Cell(int column, int row, CellProperties properties)
+        public Cell(int column, int row, ICellProperties properties)
         {
+            if (properties == null) throw new ArgumentNullException(nameof(properties));
+
             ColumnIndex = column;
             RowIndex = row;
-            CellType = properties.CellType;
-            CellValue = properties.CellValue;
+            Type = properties.Type;
+            Value = properties.Value;
             IsCalculated = properties.IsCalculated;
-
-            SetupProperties();
         }
 
-
-        private void SetupProperties()
+        public void SetupProperties()
         {
             SetupColumnName();
         }
@@ -54,9 +50,9 @@ namespace AS.EX.Model.Excel.Data
         {
             bool isReferenceToItSelfPresent = false;
 
-            if (CellValue != null)
+            if (Value != null)
             {
-                string[] values = CellValue.Split(OperationAnalyzer.GetOperationSymbols());
+                string[] values = Value.Split(CellConst.OperationSymbols);
 
                 if (values.ToArray().Contains(GetCellCoordinate()))
                 {
@@ -69,16 +65,19 @@ namespace AS.EX.Model.Excel.Data
 
         public void SetErrorValue(string errorMessage)
         {
+            if (String.IsNullOrWhiteSpace(errorMessage))
+                throw new ArgumentException("Argument is null or whitespace", nameof(errorMessage));
+
             const string errorFirstSymbol = "#";
 
-            CellType = CellTypeEnum.Error;
-            CellValue = errorFirstSymbol + errorMessage;
+            Type = CellTypeEnum.Error;
+            Value = errorFirstSymbol + errorMessage;
         }
 
 
         public override string ToString()
         {
-            return $"Cell: {GetCellCoordinate()}, CellType: {CellType}, IsCalculated: {IsCalculated}, CellValue: {CellValue}";
+            return $"Cell: {GetCellCoordinate()}, CellType: {Type}, IsCalculated: {IsCalculated}, CellValue: {Value}";
         }
     }
 }

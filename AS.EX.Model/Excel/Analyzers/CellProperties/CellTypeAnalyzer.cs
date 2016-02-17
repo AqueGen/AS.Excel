@@ -1,14 +1,16 @@
-﻿using AS.EX.Model.Consts;
+﻿using System;
+using AS.EX.Model.Consts;
 using AS.EX.Model.Excel.EnumTypes;
 
 namespace AS.EX.Model.Excel.Analyzers.CellProperties
 {
     public class CellTypeAnalyzer
     {
-
-
         public static CellTypeEnum GetCellType(string value)
         {
+            if (String.IsNullOrWhiteSpace(value))
+                throw new ArgumentException("Argument is null or whitespace", nameof(value));
+
             if (string.IsNullOrWhiteSpace(value))
             {
                return CellTypeEnum.Empty;
@@ -21,6 +23,9 @@ namespace AS.EX.Model.Excel.Analyzers.CellProperties
 
         private static CellTypeEnum GetValueType(string value)
         {
+            if (String.IsNullOrWhiteSpace(value))
+                throw new ArgumentException("Argument is null or whitespace", nameof(value));
+
             const int startIndex = 0;
             const int firstSymbolIndex = 1;
 

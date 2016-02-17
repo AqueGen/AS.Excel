@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using AS.EX.Console.Inputs.Interfaces;
-using AS.EX.Model.Excel;
-using AS.EX.Model.Excel.Data;
-using AS.EX.Model.Excel.Data.Properties;
+using AS.EX.Model.Excel.Data.Cells;
+using AS.EX.Model.Excel.Data.Cells.Properties;
+using AS.EX.Model.Interfaces;
 
 namespace AS.EX.Console.Inputs
 {
@@ -21,7 +21,7 @@ namespace AS.EX.Console.Inputs
         /// </summary>
         public ConsoleInput()
         {
-            Cells = new List<Cell>();
+            Cells = new List<ICell>();
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace AS.EX.Console.Inputs
         /// <value>
         ///     The cells.
         /// </value>
-        public List<Cell> Cells { get; set; }
+        public List<ICell> Cells { get; set; }
 
         /// <summary>
         ///     Starts the console input.

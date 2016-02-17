@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
-using AS.EX.Model.Excel;
-using AS.EX.Model.Excel.Data;
+using AS.EX.Model.Excel.Data.Cells;
+using AS.EX.Model.Interfaces;
 
 namespace AS.EX.Console.Inputs.Interfaces
 {
     public interface IInput
     {
         void StartInput();
-        int RowCount { get; }
-        int ColumnCount { get; }
-        List<Cell> Cells { get; } 
+        int RowCount { get; set; }
+        int ColumnCount { get; set; }
+        List<ICell> Cells { get; } 
     }
 }

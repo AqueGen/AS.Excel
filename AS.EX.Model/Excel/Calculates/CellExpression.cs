@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using AS.EX.Model.Excel.Analyzers;
+using AS.EX.Model.Consts;
 using AS.EX.Model.Excel.Converters;
-using AS.EX.Model.Excel.Data;
+using AS.EX.Model.Excel.Data.Cells;
 using AS.EX.Model.Excel.EnumTypes;
+using AS.EX.Model.Interfaces;
 
 namespace AS.EX.Model.Excel.Calculates
 {
@@ -23,8 +24,10 @@ namespace AS.EX.Model.Excel.Calculates
         /// </summary>
         /// <param name="cell">The cell.</param>
         /// <returns></returns>
-        public static string Calculate(Cell cell)
+        public static string Calculate(ICell cell)
         {
+            if (cell == null) throw new ArgumentNullException(nameof(cell));
+
             int[] numbers;
             char[] operations;
             SplitExpression(cell, out numbers, out operations);
@@ -47,31 +50,27 @@ namespace AS.EX.Model.Excel.Calculates
         /// <param name="cell">The cell.</param>
         /// <param name="numbers">The numbers.</param>
         /// <param name="operations">The operations.</param>
-        public static void SplitExpression(Cell cell, out int[] numbers, out char[] operations)
+        public static void SplitExpression(ICell cell, out int[] numbers, out char[] operations)
         {
+            if (cell == null) throw new ArgumentNullException(nameof(cell));
+
             var nums = new List<int>();
             var opers = new List<char>();
 
-            var num = 0;
+            int num = 0;
 
-            var expressionValue = new ExpressionValue
-            {
-                Value = string.Empty,
-                IsNextShouldBeNumber = false,
-                Chars = cell.CellValue.ToCharArray()
-            };
+            var expressionValue = new ExpressionValue(cell.Value.ToCharArray());
 
-
-            for (var i = 0; i < expressionValue.Chars.Length; i++)
+            for (int i = 0; i < expressionValue.Chars.Length; i++)
             {
                 expressionValue.Index = i;
-                if (OperationAnalyzer.GetOperationSymbols().Contains(expressionValue.Chars[i]))
+                if (CellConst.OperationSymbols.Contains(expressionValue.Chars[i]))
                 {
-                    CharIsOperationSymbol(nums, opers, ref num, expressionValue);
+                    Operation(nums, opers, ref num, expressionValue);
                 }
                 else
                 {
-                    CharIsNumber(expressionValue);
+                    Number(expressionValue);
                 }
             }
 
@@ -82,8 +81,10 @@ namespace AS.EX.Model.Excel.Calculates
             operations = opers.ToArray();
         }
 
-        private static void CharIsNumber(ExpressionValue expressionValue)
+        private static void Number(ExpressionValue expressionValue)
         {
+            if (expressionValue == null) throw new ArgumentNullException(nameof(expressionValue));
+
             if (AllNumbers.Contains(expressionValue.Chars[expressionValue.Index]))
             {
                 expressionValue.Value += expressionValue.Chars[expressionValue.Index];
@@ -92,9 +93,12 @@ namespace AS.EX.Model.Excel.Calculates
         }
 
 
-        private static void CharIsOperationSymbol(List<int> nums, List<char> opers, ref int num,
+        private static void Operation(List<int> nums, List<char> opers, ref int num,
             ExpressionValue expressionValue)
         {
+            if (nums == null) throw new ArgumentNullException(nameof(nums));
+            if (expressionValue == null) throw new ArgumentNullException(nameof(expressionValue));
+
             if (expressionValue.Index == ZeroIndex)
             {
                 expressionValue.Value = expressionValue.Chars[expressionValue.Index].ToString();
@@ -118,10 +122,15 @@ namespace AS.EX.Model.Excel.Calculates
 
         private class ExpressionValue
         {
-            public char[] Chars { get; set; }
+            public char[] Chars { get; }
             public string Value { get; set; }
             public bool IsNextShouldBeNumber { get; set; }
             public int Index { get; set; }
+
+            public ExpressionValue(char[] chars)
+            {
+                Chars = chars;
+            }
         }
     }
 }

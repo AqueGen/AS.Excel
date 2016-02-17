@@ -1,5 +1,7 @@
 ﻿using AS.EX.Model.Excel.Data;
+using AS.EX.Model.Excel.Data.Cells;
 using AS.EX.Model.Excel.EnumTypes;
+using AS.EX.Model.Interfaces;
 
 namespace AS.EX.Model.Excel.Converters
 {
@@ -11,7 +13,7 @@ namespace AS.EX.Model.Excel.Converters
         }
 
 
-        public static string ConvertCellReferenceToValue(CellTable table, Cell cell)
+        public static string ConvertCellReferenceToValue(CellTable table, ICell cell)
         {
             return CellValueConverter.ConvertCellReferenceToValue(table, cell);
         }

@@ -4,5 +4,7 @@
     {
         public const string ExpressionSymbol = "=";
         public const string TextSymbol = "'";
+
+        public static readonly char[] OperationSymbols = {'+', '-', '*', '/'};
     }
 }

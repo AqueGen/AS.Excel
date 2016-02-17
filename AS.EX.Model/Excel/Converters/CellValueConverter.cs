@@ -1,19 +1,22 @@
-﻿using AS.EX.Model.Excel.Analyzers;
+﻿using AS.EX.Model.Consts;
+using AS.EX.Model.Excel.Analyzers;
 using AS.EX.Model.Excel.Data;
+using AS.EX.Model.Excel.Data.Cells;
 using AS.EX.Model.Excel.EnumTypes;
+using AS.EX.Model.Interfaces;
 
 namespace AS.EX.Model.Excel.Converters
 {
     public class CellValueConverter
     {
-        public static string ConvertCellReferenceToValue(CellTable table, Cell cell)
+        public static string ConvertCellReferenceToValue(CellTable table, ICell cell)
         {
-            string value = cell.CellValue;
-            string[] parts = cell.CellValue.Split(OperationAnalyzer.GetOperationSymbols());
+            string value = cell.Value;
+            string[] parts = cell.Value.Split(CellConst.OperationSymbols);
 
             foreach (string part in parts)
             {
-                if (ExcelCellAnalyzer.IsCellReferencePresent(part) && cell.CellType != CellTypeEnum.Error)
+                if (ReferenceCellAnalyzer.IsCellReferencePresent(part) && cell.Type != CellTypeEnum.Error)
                 {
                     value = ReplaceReferenceToValue(table, value, part);
                 }
@@ -23,11 +26,11 @@ namespace AS.EX.Model.Excel.Converters
 
         private static string ReplaceReferenceToValue(CellTable table, string value, string part)
         {
-            Cell cell = table.GetCell(part);
+            ICell cell = table.GetCell(part);
             string newValue = value;
-            if (cell?.CellValue != null && cell.IsCalculated)
+            if (cell?.Value != null && cell.IsCalculated)
             {
-                newValue = value.Replace(part, cell.CellValue);
+                newValue = value.Replace(part, cell.Value);
             }
 
             return newValue;
