@@ -51,13 +51,15 @@ namespace AS.EX.Model.Excel.Data
                 {
                     Converter.ConvertCellReferenceToValue(this, cell);
                     cell.CheckReferenceToItSelf();
+
+                    CalculateNumbers(cell);
                 }
                 catch (Exception e)
                 {
                     cell.SetErrorValue(e.Message);
                 }
 
-                CalculateNumbers(cell);
+                
                 
                 if(!isChangedCellValue)
                 {

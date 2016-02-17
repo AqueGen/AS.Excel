@@ -112,7 +112,13 @@ namespace AS.EX.Console.Inputs
 
                 for (var columnIndex = 0; columnIndex < values.Length; columnIndex++)
                 {
-                    Cells.Add(new Cell(rowIndex, columnIndex, new CellProperties(values[columnIndex])) );
+                    ICellProperties cellProperties = new CellProperties(values[columnIndex]);
+                    cellProperties.SetupProperties();
+
+                    ICell cell = new Cell(columnIndex, rowIndex, cellProperties);
+                    cell.SetupProperties();
+
+                    Cells.Add(cell);
                 }
             }
         }
