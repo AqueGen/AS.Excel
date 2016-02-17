@@ -22,25 +22,9 @@ namespace AS.EX.Model.Excel.Data.Cells.Properties
 
         public void SetupProperties()
         {
-            SetupCellType();
-            SetupValue();
-            SetupIsCalculated();
-        }
-
-
-        private void SetupCellType()
-        {
             Type = CellTypeAnalyzer.GetCellType(_value);
-        }
-        private void SetupValue()
-        {
             Value = CellValueAnalyzer.GetCellValue(Type, _value);
-        }
-
-        private void SetupIsCalculated()
-        {
             IsCalculated = CellIsCalculatedAnalyzer.IsCalculated(Type);
         }
-
     }
 }

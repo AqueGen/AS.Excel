@@ -32,11 +32,6 @@ namespace AS.EX.Model.Excel.Data.Cells
 
         public void SetupProperties()
         {
-            SetupColumnName();
-        }
-
-        private void SetupColumnName()
-        {
             ColumnName = Converter.CellNumberToColumnName(ColumnIndex);
         }
 
