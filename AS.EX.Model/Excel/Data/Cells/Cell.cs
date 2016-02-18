@@ -123,11 +123,11 @@ namespace AS.EX.Model.Excel.Data.Cells
         }
 
         /// <summary>
-        /// Sets the error value.
+        /// Sets the error cell.
         /// </summary>
         /// <param name="errorMessage">The error message.</param>
         /// <exception cref="System.ArgumentException">Argument is null or whitespace</exception>
-        public void SetErrorValue(string errorMessage)
+        public void SetError(string errorMessage)
         {
             if (string.IsNullOrWhiteSpace(errorMessage))
                 throw new ArgumentException("Argument is null or whitespace", nameof(errorMessage));

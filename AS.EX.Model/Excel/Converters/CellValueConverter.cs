@@ -41,7 +41,7 @@ namespace AS.EX.Model.Excel.Converters
             string firstSymbol = cell.Value.Substring(0, 1);
             if (firstSymbol.Equals("*") || firstSymbol.Equals("/"))
             {
-                cell.SetErrorValue("First symbol can not be multiple or divide");
+                cell.SetError("First symbol can not be multiple or divide");
             }
         }
 
@@ -51,7 +51,7 @@ namespace AS.EX.Model.Excel.Converters
 
             if (foundCell?.Type == CellTypeEnum.Error)
             {
-                cell.SetErrorValue("Reference cell with error");
+                cell.SetError("Reference cell with error");
             }
 
             if (foundCell?.Value != null && foundCell.IsCalculated)

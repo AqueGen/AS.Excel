@@ -122,7 +122,7 @@ namespace AS.EX.Model.Excel.Data
                 }
                 catch (Exception e)
                 {
-                    cell.SetErrorValue(e.Message);
+                    cell.SetError(e.Message);
                 }
 
                 if (!isChangedCellValue)

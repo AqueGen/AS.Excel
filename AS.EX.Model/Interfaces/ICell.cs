@@ -69,6 +69,6 @@ namespace AS.EX.Model.Interfaces
         /// Sets the error value.
         /// </summary>
         /// <param name="message">The message.</param>
-        void SetErrorValue(string message);
+        void SetError(string message);
     }
 }
