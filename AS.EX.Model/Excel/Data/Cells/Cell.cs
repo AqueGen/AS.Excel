@@ -154,7 +154,7 @@ namespace AS.EX.Model.Excel.Data.Cells
         /// </returns>
         public override string ToString()
         {
-            return $"Cell: {GetCellCoordinate()}, CellType: {Type}, IsCalculated: {IsCalculated}, CellValue: {Value}";
+            return $"Cell: {GetCellCoordinate()}, Type: {Type}, IsCalculated: {IsCalculated}, Value: {Value}";
         }
     }
 }
