@@ -3,13 +3,17 @@ using System.Text.RegularExpressions;
 
 namespace AS.EX.Model.Excel.Analyzers
 {
+    /// <summary>
+    /// Analyzer for reference cell.
+    /// </summary>
     public class ReferenceCellAnalyzer
     {
         /// <summary>
-        ///     Determines whether [is cell reference present] [the specified text].
+        /// Determines whether [is cell reference present] [the specified text].
         /// </summary>
         /// <param name="cellReferenceName">The text.</param>
         /// <returns></returns>
+        /// <exception cref="System.ArgumentException">Cell reference can not be empty</exception>
         public static bool IsCellReferencePresent(string cellReferenceName)
         {
             if (string.IsNullOrWhiteSpace(cellReferenceName))

@@ -6,8 +6,18 @@ using System;
 
 namespace AS.EX.Model.Excel.Converters
 {
+    /// <summary>
+    /// Converter cell value.
+    /// </summary>
     public class CellValueConverter
     {
+        /// <summary>
+        /// Converts the cell reference to value.
+        /// </summary>
+        /// <param name="table">The table.</param>
+        /// <param name="cell">The cell.</param>
+        /// <exception cref="System.ArgumentNullException">
+        /// </exception>
         public static void ConvertCellReferenceToValue(ITable table, ICell cell)
         {
             if (table == null) throw new ArgumentNullException(nameof(table));

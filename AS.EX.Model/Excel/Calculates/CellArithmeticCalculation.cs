@@ -4,10 +4,18 @@ using System;
 namespace AS.EX.Model.Excel.Calculates
 {
     /// <summary>
-    ///     Class for operation with cells.
+    /// Class for arithmetic operation with number type cells.
     /// </summary>
     public static class CellArithmeticCalculation
     {
+        /// <summary>
+        /// Calculates the number.
+        /// </summary>
+        /// <param name="value1">The value1.</param>
+        /// <param name="typeEnum">The type enum.</param>
+        /// <param name="value2">The value2.</param>
+        /// <returns></returns>
+        /// <exception cref="System.ArgumentException">Unknown operation symbol</exception>
         public static int CalculateNumber(int value1, ArithmeticTypeEnum typeEnum, int value2)
         {
             switch (typeEnum)

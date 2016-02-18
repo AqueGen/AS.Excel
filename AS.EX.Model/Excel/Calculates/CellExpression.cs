@@ -9,15 +9,16 @@ using System.Linq;
 namespace AS.EX.Model.Excel.Calculates
 {
     /// <summary>
-    ///     Class for work with expression cell type.
+    /// Class for work with expression cell type.
     /// </summary>
     public class CellExpression
     {
         /// <summary>
-        ///     Calculates the expression.
+        /// Calculates the expression.
         /// </summary>
         /// <param name="cell">The cell.</param>
         /// <returns></returns>
+        /// <exception cref="System.ArgumentNullException"></exception>
         public static string Calculate(ICell cell)
         {
             if (cell == null) throw new ArgumentNullException(nameof(cell));
@@ -39,11 +40,12 @@ namespace AS.EX.Model.Excel.Calculates
         }
 
         /// <summary>
-        ///     Splits the expression.
+        /// Splits the expression.
         /// </summary>
         /// <param name="cell">The cell.</param>
         /// <param name="numbers">The numbers.</param>
         /// <param name="operations">The operations.</param>
+        /// <exception cref="System.ArgumentNullException"></exception>
         public static void SplitExpression(ICell cell, out int[] numbers, out char[] operations)
         {
             if (cell == null) throw new ArgumentNullException(nameof(cell));

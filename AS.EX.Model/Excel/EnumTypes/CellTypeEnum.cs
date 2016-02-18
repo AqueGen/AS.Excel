@@ -1,37 +1,37 @@
 ﻿namespace AS.EX.Model.Excel.EnumTypes
 {
     /// <summary>
-    ///     Cell type enum.
+    /// Cell type enum.
     /// </summary>
     public enum CellTypeEnum
     {
         /// <summary>
-        ///     The default cell type value.
+        /// The default cell type value.
         /// </summary>
         Default,
 
         /// <summary>
-        ///     The expression cell type value.
+        /// The expression cell type value.
         /// </summary>
         Expression,
 
         /// <summary>
-        ///     The text cell type value.
+        /// The text cell type value.
         /// </summary>
         Text,
 
         /// <summary>
-        ///     The empty cell type value.
+        /// The empty cell type value.
         /// </summary>
         Empty,
 
         /// <summary>
-        ///     The number cell type value.
+        /// The number cell type value.
         /// </summary>
         Number,
 
         /// <summary>
-        ///     The error cell type value.
+        /// The error cell type value.
         /// </summary>
         Error
     }

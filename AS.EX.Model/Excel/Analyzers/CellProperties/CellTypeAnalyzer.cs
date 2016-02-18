@@ -4,8 +4,17 @@ using System;
 
 namespace AS.EX.Model.Excel.Analyzers.CellProperties
 {
+    /// <summary>
+    /// Analyzer for Type cell property.
+    /// </summary>
     public class CellTypeAnalyzer
     {
+        /// <summary>
+        /// Gets the type of the cell.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
+        /// <exception cref="System.ArgumentNullException"></exception>
         public static CellTypeEnum GetCellType(string value)
         {
             if (value == null) throw new ArgumentNullException(nameof(value));

@@ -8,15 +8,33 @@ using System.Collections.Generic;
 
 namespace AS.EX.Model.Excel.Data
 {
+    /// <summary>
+    /// Cell table class
+    /// </summary>
+    /// <seealso cref="AS.EX.Model.Interfaces.ITable" />
     public class CellTable : ITable
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CellTable"/> class.
+        /// </summary>
         public CellTable()
         {
             Cells = new List<ICell>();
         }
 
+        /// <summary>
+        /// Gets or sets the cells.
+        /// </summary>
+        /// <value>
+        /// The cells.
+        /// </value>
         public List<ICell> Cells { get; set; }
 
+        /// <summary>
+        /// Adds the cell.
+        /// </summary>
+        /// <param name="cell">The cell.</param>
+        /// <exception cref="System.ArgumentNullException"></exception>
         public void AddCell(ICell cell)
         {
             if (cell == null) throw new ArgumentNullException(nameof(cell));
@@ -24,6 +42,9 @@ namespace AS.EX.Model.Excel.Data
             Cells.Add(cell);
         }
 
+        /// <summary>
+        /// Calculates the cells.
+        /// </summary>
         public void CalculateCells()
         {
             bool isChangedCellValue;
@@ -37,6 +58,16 @@ namespace AS.EX.Model.Excel.Data
             } while (isChangedCellValue);
         }
 
+        /// <summary>
+        /// Gets the cell.
+        /// </summary>
+        /// <param name="cellReference">The cell reference.</param>
+        /// <returns></returns>
+        /// <exception cref="System.ArgumentException">
+        /// Argument is null or whitespace
+        /// or
+        /// Cell not found
+        /// </exception>
         public ICell GetCell(string cellReference)
         {
             if (string.IsNullOrWhiteSpace(cellReference))

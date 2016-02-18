@@ -7,6 +7,10 @@ using System.Collections.Generic;
 
 namespace AS.EX.Console.Inputs
 {
+    /// <summary>
+    /// Console input class
+    /// </summary>
+    /// <seealso cref="AS.EX.Console.Inputs.Interfaces.IInput" />
     public class ConsoleInput : IInput
     {
         private const int TableVariableCount = 2;
@@ -16,7 +20,7 @@ namespace AS.EX.Console.Inputs
         private int _rowCount;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ConsoleInput" /> class.
+        /// Initializes a new instance of the <see cref="ConsoleInput" /> class.
         /// </summary>
         public ConsoleInput()
         {
@@ -24,31 +28,31 @@ namespace AS.EX.Console.Inputs
         }
 
         /// <summary>
-        ///     Gets or sets the cells.
+        /// Gets or sets the cells.
         /// </summary>
         /// <value>
-        ///     The cells.
+        /// The cells.
         /// </value>
         public List<ICell> Cells { get; set; }
 
         /// <summary>
-        ///     Gets or sets the column count.
+        /// Gets or sets the column count.
         /// </summary>
         /// <value>
-        ///     The column count.
+        /// The column count.
         /// </value>
         public int ColumnCount { get; set; }
 
         /// <summary>
-        ///     Gets or sets the row count.
+        /// Gets or sets the row count.
         /// </summary>
         /// <value>
-        ///     The row count.
+        /// The row count.
         /// </value>
         public int RowCount { get; set; }
 
         /// <summary>
-        ///     Starts the console input.
+        /// Starts the console input.
         /// </summary>
         public void StartInput()
         {

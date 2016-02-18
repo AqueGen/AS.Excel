@@ -2,17 +2,20 @@
 
 namespace AS.EX.Model.Excel.Converters
 {
-    internal static class CellColumnNameConverter
+    /// <summary>
+    /// Class for create cell column name
+    /// </summary>
+    public static class CellColumnNameConverter
     {
         private const char FirstExcelLetter = 'A';
         private const char LastExcelLetter = 'Z';
 
         /// <summary>
-        ///     Gets the letter.
+        /// Gets the letter.
         /// </summary>
         /// <param name="columnNumber">The column number.</param>
         /// <returns></returns>
-        internal static string GetLetterByNumber(int columnNumber)
+        public static string GetLetterByNumber(int columnNumber)
         {
             string columnName = string.Empty;
 

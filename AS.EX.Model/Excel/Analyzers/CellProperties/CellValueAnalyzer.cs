@@ -4,8 +4,18 @@ using System;
 
 namespace AS.EX.Model.Excel.Analyzers.CellProperties
 {
+    /// <summary>
+    /// Analyzer for Value cell property.
+    /// </summary>
     public class CellValueAnalyzer
     {
+        /// <summary>
+        /// Gets the cell value.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
+        /// <exception cref="System.ArgumentNullException"></exception>
         public static string GetCellValue(CellTypeEnum type, string value)
         {
             if (value == null) throw new ArgumentNullException(nameof(value));

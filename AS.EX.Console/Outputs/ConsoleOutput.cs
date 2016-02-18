@@ -5,12 +5,25 @@ using System.Collections.Generic;
 
 namespace AS.EX.Console.Outputs
 {
+    /// <summary>
+    /// Console output class.
+    /// </summary>
+    /// <seealso cref="AS.EX.Console.Outputs.Interfaces.IOutput" />
     public class ConsoleOutput : IOutput
     {
         private readonly List<ICell> _cells;
         private readonly int _column;
         private readonly int _row;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConsoleOutput"/> class.
+        /// </summary>
+        /// <param name="row">The row.</param>
+        /// <param name="column">The column.</param>
+        /// <param name="cells">The cells.</param>
+        /// <exception cref="System.ArgumentOutOfRangeException">
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException"></exception>
         public ConsoleOutput(int row, int column, List<ICell> cells)
         {
             if (row <= 0) throw new ArgumentOutOfRangeException(nameof(row));
@@ -22,6 +35,9 @@ namespace AS.EX.Console.Outputs
             _cells = cells;
         }
 
+        /// <summary>
+        /// Starts the output.
+        /// </summary>
         public void StartOutput()
         {
             int cellIndex = 0;
