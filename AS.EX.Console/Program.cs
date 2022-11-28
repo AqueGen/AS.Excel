@@ -15,6 +15,9 @@ namespace AS.EX.Console
     {
         public static void Main(string[] args)
         {
+            //test initial changes
+            //new changes 2
+            //new changes 3
             System.Console.WriteLine(@"Start Spreadsheet Simulator");
 
             IInput input;
